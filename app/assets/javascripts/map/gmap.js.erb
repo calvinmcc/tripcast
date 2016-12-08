@@ -1,0 +1,404 @@
+var marker;
+var markers = [];
+var map;
+var infowindows = [];
+var steps = [];
+var gasMarkers = [];
+var gasWindows = [];
+var hotelMarkers = [];
+var hotelWindows = [];
+
+function initMap() {
+  var directionsService = new google.maps.DirectionsService();
+  var directionsDisplay = new google.maps.DirectionsRenderer({
+    draggable: true,
+    map: map,
+    suppressMarkers: true
+  });
+    map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 7
+  });
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      map.setCenter(pos);
+    }, function() {
+      handleLocationError(true, map.getCenter());
+    });
+  } else {
+    handleLocationError(false, map.getCenter());
+  }
+
+
+  directionsDisplay.setMap(map);
+
+  var onChangeHandler = function() {
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+  };
+
+  map.addListener('click', clearInfoWindows);
+
+  map.addListener('dblclick', function(event){
+    if (gasMarkers.length > 0) {
+      clearGasMarkers();
+    }
+    var check = document.getElementById('gas').checked
+    if (check == true) {
+      var lat = event.latLng.lat(event.latLng.lng)
+      var lng = event.latLng.lng(event.latLng.lat)
+      console.log(lat);
+      console.log(lng);
+      getGasPrices(lat, lng)
+    }
+  });
+
+  map.addListener('dblclick', function(event){
+    if (hotelMarkers.length > 0) {
+      clearHotelMarkers();
+    }
+    var check = document.getElementById('hotel').checked
+    if (check == true) {
+      var lat = event.latLng.lat(event.latLng.lng)
+      var lng = event.latLng.lng(event.latLng.lat)
+      console.log(lat);
+      console.log(lng);
+      getHotelPrices(lat, lng)
+    }
+  });
+
+
+  //
+  // directionsDisplay.addListener('directions_changed', function() {
+  // });
+
+  $('#go').on('click', getDirectionData);
+  $('#go').on('click', onChangeHandler);
+  $('#go').on('click', clearMarkers);
+  $('#go').on('click', clearSteps);
+
+  var input = document.getElementById('start');
+  var options = {
+    types: ['establishment', 'address']
+  };
+  var autocomplete = new google.maps.Autocomplete(input);
+}
+
+function calcRoute() {
+  var start = document.getElementById('start').value;
+  var end = document.getElementById('end').value;
+  var request = {
+    origin: start,
+    destination: end,
+    travelMode: 'DRIVING'
+  };
+
+
+  directionsService.route(request, function(result, status) {
+    if (status == 'OK') {
+      directionsDisplay.setDirections(result);
+    }
+  });
+
+}
+
+
+var getDirectionData = function() {
+  $('#tripDetails').fadeIn(800);
+  var service = new google.maps.DistanceMatrixService();
+  service.getDistanceMatrix(
+    {
+      origins: [document.getElementById('start').value],
+      destinations: [document.getElementById('end').value],
+      travelMode: 'DRIVING',
+      // transitOptions: TransitOptions,
+      // drivingOptions: DrivingOptions,
+      // unitSystem: UnitSystem,
+      // avoidHighways: Boolean,
+      // avoidTolls: Boolean,
+    }, mapData);
+
+  function mapData(response, status) {
+    if (status == 'OK') {
+      var origins = response.originAddresses;
+      var destinations = response.destinationAddresses;
+      for (var i = 0; i < origins.length; i++) {
+        var results = response.rows[i].elements;
+        for (var j = 0; j < results.length; j++) {
+          var element = results[j];
+          var distance = element.distance.text;
+          var duration = element.duration.text;
+          var from = origins[i];
+          var to = destinations[j];
+          $('#tripTime').html(duration);
+          // $('#tripDistance').html(distance);
+        }
+      }
+    }
+  }
+};
+
+function getHotelPrices(lat, lng) {
+  var latitude = lat.toFixed(4)
+  var longitude = lng.toFixed(4)
+  $.ajax({
+    url: `https://api.sandbox.amadeus.com/v1.2/hotels/search-circle?apikey=<%= ENV['HOTEL_KEY'] %>&latitude=${latitude}&longitude=${longitude}&radius=32&check_in=2016-12-15&check_out=2016-12-16&lang=EN&currency=USD&number_of_results=10&all_rooms=false&show_sold_out=false`,
+    dataType: "json",
+    success: function(data) {
+      var hotelData = data.results
+      console.log(hotelData);
+      hotel = hotelData
+      addHotelMarker(hotelData)
+    }
+  });
+}
+
+function addHotelMarker(hotelData) {
+  // var hotels = hotelData.stations
+  for (var i = 0; i < 10; i++) {
+    var lat = hotelData[i].location.latitude;
+    var lng = hotelData[i].location.longitude;
+    var hotelObject = hotelData[i];
+    var location = { lat: parseFloat(lat), lng: parseFloat(lng) };
+    marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+    hotelMarkers.push(marker)
+    addHotelWindow(location, marker, hotelObject)
+  }
+}
+
+
+function addHotelWindow (location, marker, hotelObject) {
+  var name = hotelObject.property_name
+  var price = hotelObject.total_price.amount
+  var address = hotelObject.address
+  var hotelForecast = `<div id="hotelForecast">
+                        <h3>${name}</h3>
+                        <h2>Total Price: $${price} USD</h2>
+                        <h4>${address.line1}</h4>
+                        <h4>${address.city}, ${address.region} ${address.postal_code}</h4>
+                      </div>`
+  var hotelWindow = new google.maps.InfoWindow({
+    content: hotelForecast,
+    map: map,
+    location: location
+  })
+  hotelWindows.push(hotelWindow);
+  hotelWindow.close();
+  marker.addListener('click', function(){
+    clearHotelWindows();
+    hotelWindow.open(map, marker);
+  });
+}
+
+function getGasPrices(lat, lng) {
+  $.ajax({
+    url: `http://api.mygasfeed.com/stations/radius/${lat}/${lng}/10/reg/price/<%= ENV['GAS_KEY'] %>.json?callback=?`,
+    dataType: "jsonp",
+    success: function(data) {
+      var gasData = data
+      console.log(gasData);
+      gas = gasData
+      addGasMarker(gasData)
+    }
+  });
+}
+
+function addGasMarker(gasData) {
+  var stations = gasData.stations
+  if (stations.length > 10) {
+    for (var i = 0; i < 10; i++) {
+      var lat = stations[i].lat;
+      var lng = stations[i].lng;
+      var gasObject = stations[i];
+      var location = { lat: parseFloat(lat), lng: parseFloat(lng) };
+      marker = new google.maps.Marker({
+        position: location,
+        map: map
+      });
+      gasMarkers.push(marker)
+      addGasWindow(location, marker, gasObject)
+    }
+  } else {
+    for (var i = 0; i <= stations.length; i++) {
+      var lat = stations[i].lat;
+      var lng = stations[i].lng;
+      var gasObject = stations[i];
+      var location = { lat: parseFloat(lat), lng: parseFloat(lng) };
+      marker = new google.maps.Marker({
+        position: location,
+        map: map
+      });
+      gasMarkers.push(marker)
+      addGasWindow(location, marker, gasObject)
+    }
+  }
+}
+
+
+function addGasWindow (location, marker, gasObject) {
+  var stationName = gasObject.station
+  var price = gasObject.reg_price
+  var gasForecast = `<div id="gasForecast">
+                      <h3>${stationName}</h3>
+                      <h2>Average price: ${price}</h2>
+                    </div>`
+  var gasWindow = new google.maps.InfoWindow({
+    content: gasForecast,
+    map: map,
+    location: location
+  })
+  gasWindows.push(gasWindow);
+  gasWindow.close();
+  marker.addListener('click', function(){
+    clearGasWindows();
+    gasWindow.open(map, marker);
+  });
+}
+
+function addInfoWindow (location, marker, weatherData) {
+  var localTime = new Date(weatherData.currently.time * 1000);
+  var precip = Math.floor(weatherData.currently.precipProbability * 100)
+  var temp = weatherData.currently.apparentTemperature
+  var summary = weatherData.currently.summary
+  var forecast = `<div id="forecast">
+                    <h3>Expected conditions at ${localTime}</h3>
+                    <h5>${summary} and ${temp}&deg;F</h6>
+                    <h6>${precip}% Chance of Precipitation</h6>
+                  </div>`
+  var infowindow = new google.maps.InfoWindow({
+    content: forecast,
+    map: map,
+    location: location
+  });
+  infowindows.push(infowindow);
+  infowindow.close();
+  marker.addListener('click', function() {
+    clearInfoWindows();
+    infowindow.open(map, marker);
+  });
+}
+
+function clearMarkers() {
+  for (var i=0; i<markers.length; i++) {
+    markers[i].setMap(null)
+  }
+}
+
+function clearGasMarkers() {
+  for (var i=0; i<gasMarkers.length; i++) {
+    gasMarkers[i].setMap(null)
+  }
+}
+
+function clearHotelMarkers() {
+  for (var i=0; i<hotelMarkers.length; i++) {
+    hotelMarkers[i].setMap(null)
+  }
+}
+
+function clearInfoWindows() {
+  for (var i=0; i <infowindows.length; i++) {
+    infowindows[i].close();
+  }
+}
+
+function clearGasWindows() {
+  for (var i=0; i <gasWindows.length; i++) {
+    gasWindows[i].close();
+  }
+}
+
+function clearHotelWindows() {
+  for (var i=0; i <hotelWindows.length; i++) {
+    hotelWindows[i].close();
+  }
+}
+
+function addMarker(location, weatherData) {
+  marker = new google.maps.Marker({
+    position: location,
+    map: map
+  });
+  markers.push(marker)
+  addInfoWindow(location, marker, weatherData)
+}
+
+function clearSteps() {
+  if (steps.length > 0) {
+    $('#stepList').html('');
+    steps = [];
+  }
+}
+
+function renderSteps(steps) {
+  var stepTemp = $('#stepTemp').html();
+  var stepList = $('#stepList');
+
+  stepList.html(Mustache.render(stepTemp, steps))
+}
+
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+  var time = Date.parse(document.getElementById('datetimepicker').value);
+  directionsService.route({
+    origin: document.getElementById('start').value,
+    destination: document.getElementById('end').value,
+    travelMode: 'DRIVING',
+    drivingOptions: {
+      departureTime: new Date(time),
+      trafficModel: 'bestguess'
+    }
+  }, function(response, status) {
+    if (status === 'OK') {
+      directionsDisplay.setDirections(response);
+      var mapObject = (response.routes[0].legs[0].steps);
+      time = document.getElementById('datetimepicker').value;
+      getcoords(mapObject, 0, time);
+
+      }
+  });
+
+  function getcoords(mapObject, counter, time) {
+      var  i  = counter;
+      var lat = (mapObject[i].start_location.lat(mapObject[i].start_location.lng));
+      var lng = (mapObject[i].start_location.lng(mapObject[i].start_location.lat));
+      var instructions = mapObject[i].instructions
+      weatherCoords = { lat: parseFloat(lat), lng: parseFloat(lng) };
+      if (i === 0) {
+        var milliseconds = Date.parse(time)
+      } else {
+        milliseconds = ((time * 1000) + (mapObject[i - 1].duration.value * 1000))
+      }
+      var time = Math.floor(milliseconds/1000);
+        $.ajax({
+                url: `https://api.darksky.net/forecast/<%= ENV['WEATHER_KEY'] %>/${lat},${lng},${time}?`,
+                dataType : "jsonp",
+                success : function(parsed_json) {
+                  var weatherData = parsed_json;
+                  var precipProb = Math.floor(weatherData.currently.precipProbability * 100)
+                  var temp = Math.floor(weatherData.currently.apparentTemperature)
+                  if (mapObject[i].distance.value > 20000 ||
+                    i == mapObject.length - 1 ||
+                    i === 0) {
+                      addMarker(weatherCoords, weatherData);
+                    }
+                  if (counter < mapObject.length - 1) {
+                    getcoords(mapObject, i+1, time);
+                    steps.push({step: instructions,
+                                i: (i + 1),
+                                weatherData: weatherData,
+                                temp: temp,
+                                precip: precipProb})
+                  } else {
+                    renderSteps(steps)
+                  }
+                }
+        });
+  }
+}

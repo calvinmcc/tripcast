@@ -1,0 +1,124 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$blue: rgba(80, 185, 224, 0.6);
+$accent: rgba(207,231,167, 0.6);
+$input: rgba(207,231,167, 0.3);
+
+$font: 'Hammersmith One', sans-serif;
+$body: 'Gudea', sans-serif;
+
+.navbar {
+  width: 100%;
+  background-color: $blue;
+  height: 10%;
+  font-family: $font;
+  color: white;
+  font-size: 2.2em;
+  text-align: right;
+  padding-right: 1em;
+  border-bottom: 0.2em solid $accent;
+}
+
+.gasIcon {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  position: fixed;
+  z-index: 99999999;
+  margin-top: 20%;
+  margin-left: 95%;
+}
+
+.hotelIcon {
+  @extend .gasIcon;
+  margin-top: 25%;
+}
+
+input {
+  margin-top: 1%;
+  font-size: 14px;
+  font-family: $body;
+  width: 98%;
+  border: 1px solid white;
+  border-bottom-color: $input;
+  transition: border 1s;
+  height: 2em;
+  &:focus {
+    outline: none;
+    border: 1px solid $accent;
+  }
+}
+
+.title {
+  display: inline-block;
+  position: relative;
+  margin-top: .7em;
+  margin-right: 1%;
+}
+
+#map {
+  height: 90%;
+  margin-left: 25%;
+  margin-right: 0;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: static;
+}
+
+#directionsPanel {
+  font-family: $body;
+  background-color: white;
+  padding-top: 1%;
+  padding-left: 1%;
+  float:left;
+  width: 25%;
+  height: 88%;
+}
+
+#stepList {
+  position: static;;
+  margin-top: 1%;
+  clear: left;
+  width:100%;
+  height: 60.88%;
+  list-style: none;
+  padding: 0;
+  list-style-type: none;
+  overflow: scroll;
+}
+
+.directionList {
+  padding: 1px;
+  border-right: 2px solid $blue;
+  border-bottom: 1px solid $blue;
+}
+
+#go {
+  margin-top: 1%;
+  background-color: $blue;
+  color: white;
+  width: 80%;
+  padding: 0.6em;
+  border-radius: 3em;
+  border: none;
+  font-family: $font;
+  font-size: 1em;
+  transition: font-size 1s, padding 1s;
+  &:hover {
+    font-size: 1.2em;
+    padding: 0.4em
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+#footer {
+  @extend .navbar;
+  margin-bottom: 0;
+}
