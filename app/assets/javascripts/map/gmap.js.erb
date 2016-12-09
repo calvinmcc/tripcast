@@ -8,27 +8,6 @@ var gasWindows = [];
 var hotelMarkers = [];
 var hotelWindows = [];
 
-var icons = {
-          partly: {
-            icon: 'partly.png'
-          },
-          rain: {
-            icon: 'rain.png'
-          },
-          snow: {
-            icon: 'snow.png'
-          },
-          sun: {
-            icon: '/assets/sun.png'
-          },
-          sunrain: {
-            icon: 'sunrain.png'
-          },
-          sunsnow: {
-            icon: 'sunsnow.png'
-          }
-        };
-
 function initMap() {
   var directionsService = new google.maps.DirectionsService();
   var directionsDisplay = new google.maps.DirectionsRenderer({
@@ -341,9 +320,9 @@ function clearHotelWindows() {
   }
 }
 
-function addMarker(location, weatherData) {
+function addMarker(location, weatherData, weatherIcon) {
   marker = new google.maps.Marker({
-    icon: icons.sun.icon,
+    icon: `/assets/${weatherIcon}`,
     animation: google.maps.Animation.DROP,
     position: location,
     map: map
@@ -407,10 +386,11 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
                   console.log(weatherData);
                   var precipProb = Math.floor(weatherData.currently.precipProbability * 100)
                   var temp = Math.floor(weatherData.currently.apparentTemperature)
+                  var weatherIcon = weatherData.currently.icon
+                  console.log(weatherIcon);
                   if (mapObject[i].distance.value > 20000 ||
-                    i == mapObject.length - 1 ||
-                    i === 0) {
-                      addMarker(weatherCoords, weatherData);
+                    i == mapObject.length - 1) {
+                      addMarker(weatherCoords, weatherData, weatherIcon);
                     }
                   if (counter < mapObject.length - 1) {
                     getcoords(mapObject, i+1, time);
