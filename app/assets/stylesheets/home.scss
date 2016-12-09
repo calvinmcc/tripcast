@@ -5,12 +5,13 @@
 $blue: rgba(80, 185, 224, 0.6);
 $accent: rgba(207,231,167, 0.6);
 $input: rgba(207,231,167, 0.3);
+$yellow: rgb(255,203,60);
 
 $font: 'Hammersmith One', sans-serif;
 $body: 'Gudea', sans-serif;
 
 .navbar {
-  width: 100%;
+  width: fill;
   background-color: $blue;
   height: 10%;
   font-family: $font;
@@ -19,13 +20,14 @@ $body: 'Gudea', sans-serif;
   text-align: right;
   padding-right: 1em;
   border-bottom: 0.2em solid $accent;
+  z-index: 99999999;
 }
 
 .gasIcon {
   width: 50px;
   height: 50px;
   background-color: white;
-  position: fixed;
+  position: absolute;
   z-index: 99999999;
   margin-top: 20%;
   margin-left: 95%;
@@ -56,10 +58,12 @@ input {
   position: relative;
   margin-top: .7em;
   margin-right: 1%;
+  z-index: 99999999;
 }
 
 #map {
   height: 90%;
+  width: 74%;
   margin-left: 25%;
   margin-right: 0;
 }
@@ -123,4 +127,8 @@ html, body {
   margin-bottom: 0;
   border-bottom: none;
   border-top: 0.2em solid $accent;
+  img {
+    position: relative;
+    max-height: 1.2em;
+  }
 }

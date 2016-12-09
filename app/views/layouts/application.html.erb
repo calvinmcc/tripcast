@@ -14,17 +14,22 @@
   <body>
 
     <%= yield %>
+    <div class="options">
 
-    <div class="gasIcon">
-      ⛽️ <input type="checkbox" id="gas" value="gas">
+      <div class="gasIcon">
+        ⛽️ <input type="checkbox" id="gas" value="gas">
+      </div>
+
+      <div class="hotelIcon">
+        🏨 <input type="checkbox" id="hotel" value="hotel">
+      </div>
+
     </div>
 
-    <div class="hotelIcon">
-      🏨 <input type="checkbox" id="hotel" value="hotel">
-    </div>
     <div class="navbar">
       <div class="title">☀️ tripcast</div>
     </div>
+
     <div id="directionsPanel">
         <label for="start">Start: </label>
         <input type="text" name="start" id="start" value="milwaukee">
@@ -64,7 +69,7 @@
 
     <div id="map">
     </div>
-    <div id="footer"></div>
+    <div id="footer"><img src="/assets/darksky.png" /></div>
   </body>
   <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GMAPS_KEY']%>&libraries=places&callback=initMap" async defer></script>
   <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
