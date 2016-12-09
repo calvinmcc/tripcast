@@ -55,8 +55,6 @@ function initMap() {
     if (check == true) {
       var lat = event.latLng.lat(event.latLng.lng)
       var lng = event.latLng.lng(event.latLng.lat)
-      console.log(lat);
-      console.log(lng);
       getGasPrices(lat, lng)
     }
   });
@@ -70,8 +68,6 @@ function initMap() {
     if (check == true) {
       var lat = event.latLng.lat(event.latLng.lng)
       var lng = event.latLng.lng(event.latLng.lat)
-      console.log(lat);
-      console.log(lng);
       getHotelPrices(lat, lng)
     }
   });
@@ -145,7 +141,6 @@ function getHotelPrices(lat, lng) {
     dataType: "json",
     success: function(data) {
       var hotelData = data.results
-      console.log(hotelData);
       hotel = hotelData
       addHotelMarker(hotelData)
     }
@@ -161,6 +156,7 @@ function addHotelMarker(hotelData) {
     var location = { lat: parseFloat(lat), lng: parseFloat(lng) };
     marker = new google.maps.Marker({
       position: location,
+      icon: '/assets/hotel-icon.png',
       animation: google.maps.Animation.DROP,
       map: map
     });
@@ -200,7 +196,6 @@ function getGasPrices(lat, lng) {
     dataType: "jsonp",
     success: function(data) {
       var gasData = data
-      console.log(gasData);
       gas = gasData
       addGasMarker(gasData)
     }
@@ -216,6 +211,7 @@ function addGasMarker(gasData) {
       var gasObject = stations[i];
       var location = { lat: parseFloat(lat), lng: parseFloat(lng) };
       marker = new google.maps.Marker({
+        icon: '/assets/gas-icon.png',
         animation: google.maps.Animation.DROP,
         position: location,
         map: map
@@ -230,6 +226,7 @@ function addGasMarker(gasData) {
       var gasObject = stations[i];
       var location = { lat: parseFloat(lat), lng: parseFloat(lng) };
       marker = new google.maps.Marker({
+        icon: '/assets/gas-icon.png',
         animation: google.maps.Animation.DROP,
         position: location,
         map: map
@@ -383,11 +380,9 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
                 dataType : "jsonp",
                 success : function(parsed_json) {
                   var weatherData = parsed_json;
-                  console.log(weatherData);
                   var precipProb = Math.floor(weatherData.currently.precipProbability * 100)
                   var temp = Math.floor(weatherData.currently.apparentTemperature)
                   var weatherIcon = weatherData.currently.icon
-                  console.log(weatherIcon);
                   if (mapObject[i].distance.value > 20000 ||
                     i == mapObject.length - 1) {
                       addMarker(weatherCoords, weatherData, weatherIcon);
