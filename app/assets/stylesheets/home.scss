@@ -121,4 +121,6 @@ html, body {
 #footer {
   @extend .navbar;
   margin-bottom: 0;
+  border-bottom: none;
+  border-top: 0.2em solid $accent;
 }
