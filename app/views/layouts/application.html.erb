@@ -3,91 +3,25 @@
   <head>
     <title>Tripcast2</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-
   </head>
-  <link href="https://fonts.googleapis.com/css?family=Gudea|Hammersmith+One" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css?family=Gudea|Hammersmith+One|Nunito+Sans" rel="stylesheet">
   <body>
-
-    <%= yield %>
-    <div class="options">
-
-      <div class="gasIcon">
-        ⛽️ <input type="checkbox" id="gas" value="gas">
-      </div>
-
-      <div class="hotelIcon">
-        🏨 <input type="checkbox" id="hotel" value="hotel">
-      </div>
-
-    </div>
-
     <div class="navbar">
+      <% if current_user.nil? %>
+        <div class="navbar-left">
+          <%= link_to 'Sign In', new_session_path %> |
+          <%= link_to 'Sign Up', new_user_path %>
+        </div>
+      <% else %>
+        <div class="navbar-left">
+          <%= link_to 'Sign Out', sessions_path, method: :delete %> |
+          <%= link_to "Hey #{current_user.first_name}!", user_path(current_user) %>
+        </div>
+      <% end %>
       <div class="title">🔆 tripcast</div>
     </div>
-
-    <div id="directionsPanel">
-        <label for="start">Start: </label>
-        <input type="text" name="start" id="start" value="milwaukee">
-        <br>
-        <label for="end">End: </label>
-        <input type="text" name="end" id="end" value="la crosse, wi">
-        <br>
-        <label for="departure">Departure Time: </label>
-        <input type="text" name="departure" id="datetimepicker">
-        <!-- <br>
-        <label for="departure">End: </label>
-        <input type="text" name="end" id="end">
-        <br> -->
-        <br>
-        <input type="button" name="go" value="GO!" id="go">
-        <br>
-        <div id="tripDetails" style="display: none">
-          <p>Travel time: <span id="tripTime"></span></p>
-          <!-- Total distance:
-          <p id="tripDistance"></p> -->
-        </div>
-        <ul id="stepList"></ul>
-          <script type="x-tmpl-mustache" id="stepTemp">
-          {{#.}}
-            <li id={{i}} class="directionList">
-              {{i}}
-              {{{step}}},
-              {{weatherData.currently.summary}},
-              {{{precip}}}% chance of precipitation,
-              {{temp}}&deg;F
-            </li>
-          {{/.}}
-          </script>
-        </div>
-
-    </div>
-
-    <div id="map">
-    </div>
-    <div id="footer"><img src="/assets/darksky.png" /></div>
+    <%= yield %>
   </body>
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GMAPS_KEY']%>&libraries=places&callback=initMap" async defer></script>
-  <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
-  <script src="https://unpkg.com/flatpickr"></script>
-  <script type="text/javascript">
-
-    flatpickr("#datetimepicker", {
-      defaultDate: Date.now(),
-      enableTime: true,
-      altInput: true,
-      altFormat: "F j, Y h:i K"
-
-    }); // [Flatpickr, Flatpickr, ...]
-    document.getElementById("datetimepicker").flatpickr(config); // Flatpickr
-    let calendar = new Flatpickr(element, config); // Flatpickr
-
-
-    $(".selector").flatpickr({});
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 </html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+    <body>
+      <div class="options">
+        <div class="gasIcon">
+          ⛽️ <input type="checkbox" id="gas" value="gas">
+        </div>
+        <div class="hotelIcon">
+          🏨 <input type="checkbox" id="hotel" value="hotel">
+        </div>
+      </div>
+      <div id="directionsPanel">
+        <label for="start">Start: </label>
+        <input type="text" name="start" id="start" value="milwaukee">
+        <br>
+        <label for="end">End: </label>
+        <input type="text" name="end" id="end" value="la crosse, wi">
+        <br>
+        <label for="departure">Departure Time: </label>
+        <input type="text" name="departure" id="datetimepicker">
+        <br>
+        <input type="button" name="go" value="GO!" id="go">
+        <br>
+        <div id="tripDetails" style="display: none">
+          <p>Travel time: <span id="tripTime"></span></p>
+        </div>
+        <ul id="stepList"></ul>
+          <script type="x-tmpl-mustache" id="stepTemp">
+          {{#.}}
+            <li id={{i}} class="directionList">
+              {{i}}
+              {{{step}}},
+              {{weatherData.currently.summary}},
+              {{{precip}}}% chance of precipitation,
+              {{temp}}&deg;F
+            </li>
+          {{/.}}
+          </script>
+        </div>
+      </div>
+      <div id="map"></div>
+      <div id="footer"><img src="/assets/darksky.png" /></div>
+      <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GMAPS_KEY']%>&libraries=places&callback=initMap" async defer></script>
+      <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
+      <script src="https://unpkg.com/flatpickr"></script>
+      <script type="text/javascript">
+        flatpickr("#datetimepicker", {
+          defaultDate: Date.now(),
+          enableTime: true,
+          altInput: true,
+          altFormat: "F j, Y h:i K"
+        });
+      document.getElementById("datetimepicker").flatpickr(config);
+      let calendar = new Flatpickr(element, config);
+      $(".selector").flatpickr({});
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+  </body>
+</html>

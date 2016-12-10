@@ -1,0 +1,36 @@
+$blue: rgba(80, 185, 224, 0.6);
+$accent: rgba(207,231,167, 0.6);
+$darkAccent: rgba(122, 189, 109, 0.6);
+$brightInput: rgba(111, 144, 55, 0.62);
+$input: rgba(207,231,167, 0.3);
+$yellow: rgb(255, 203, 60);
+$form: 'Nunito Sans', sans-serif;
+
+.new-user {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin-left: 35%;
+  margin-top: 5%;
+  font-family: $form;
+  & input {
+    margin-top: 1%;
+    font-size: 14px;
+    width: 100%;
+    border: 2px solid white;
+    border-bottom-color: $brightInput;
+    transition: border 1s;
+    height: 2em;
+    &:focus {
+      outline: none;
+      border: 2px solid $darkAccent;
+    }
+    &.button {
+      width: 100%;
+      background-color: $blue;
+      border-radius: 10px;
+      border: none;
+      margin-top: 2%;
+    }
+  }
+}

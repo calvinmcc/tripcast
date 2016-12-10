@@ -11,16 +11,39 @@ $font: 'Hammersmith One', sans-serif;
 $body: 'Gudea', sans-serif;
 
 .navbar {
-  width: fill;
+  width: inherit;
   background-color: $blue;
   height: 10%;
   font-family: $font;
-  color: white;
-  font-size: 2.2em;
-  text-align: right;
   padding-right: 1em;
   border-bottom: 0.2em solid $accent;
   z-index: 99999999;
+}
+
+.navbar-left {
+  text-align: left;
+  width: 40%;
+  display: inline-block;
+  position: relative;
+  margin-top: .7em;
+  margin-right: 1%;
+  z-index: 99999999;
+  color: white;
+}
+
+.title {
+  width: 50%;
+  position: relative;
+  display: inline-block;
+  margin-top: .7em;
+  margin-right: 1%;
+  z-index: 99999999;
+  color: white;
+  font-size: 2.2em;
+  text-align: right;
+  &img {
+    display: inline;
+  }
 }
 
 .gasIcon {
@@ -50,17 +73,6 @@ input {
   &:focus {
     outline: none;
     border: 1px solid $accent;
-  }
-}
-
-.title {
-  display: inline-block;
-  position: relative;
-  margin-top: .7em;
-  margin-right: 1%;
-  z-index: 99999999;
-  &img {
-    display: inline;
   }
 }
 
@@ -136,6 +148,13 @@ html, body {
   }
 }
 
-.svg-icon path {
-  fill: $yellow;
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
 }
