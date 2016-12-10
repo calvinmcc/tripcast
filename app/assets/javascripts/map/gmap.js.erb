@@ -136,8 +136,12 @@ var getDirectionData = function() {
 function getHotelPrices(lat, lng) {
   var latitude = lat.toFixed(4)
   var longitude = lng.toFixed(4)
+  var checkInTime = document.getElementById('datetimepicker').value;
+  var checkIn = checkInTime.substring(0, 10);
+  var nextDay = moment(checkIn).add(1, 'day')
+  var checkOut = nextDay.format('YYYY-MM-DD')
   $.ajax({
-    url: `https://api.sandbox.amadeus.com/v1.2/hotels/search-circle?apikey=<%= ENV['HOTEL_KEY'] %>&latitude=${latitude}&longitude=${longitude}&radius=32&check_in=2016-12-15&check_out=2016-12-16&lang=EN&currency=USD&number_of_results=10&all_rooms=false&show_sold_out=false`,
+    url: `https://api.sandbox.amadeus.com/v1.2/hotels/search-circle?apikey=<%= ENV['HOTEL_KEY'] %>&latitude=${latitude}&longitude=${longitude}&radius=25&check_in=${checkIn}&check_out=${checkOut}&lang=EN&currency=USD&number_of_results=10&all_rooms=false&show_sold_out=false`,
     dataType: "json",
     success: function(data) {
       var hotelData = data.results
@@ -148,7 +152,6 @@ function getHotelPrices(lat, lng) {
 }
 
 function addHotelMarker(hotelData) {
-  // var hotels = hotelData.stations
   for (var i = 0; i < 10; i++) {
     var lat = hotelData[i].location.latitude;
     var lng = hotelData[i].location.longitude;
