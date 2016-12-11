@@ -14,17 +14,38 @@
         </div>
       </div>
       <div id="directionsPanel">
-        <label for="start">Start: </label>
-        <input type="text" name="start" id="start" value="milwaukee">
-        <br>
-        <label for="end">End: </label>
-        <input type="text" name="end" id="end" value="la crosse, wi">
-        <br>
-        <label for="departure">Departure Time: </label>
-        <input type="text" name="departure" id="datetimepicker">
-        <br>
-        <input type="button" name="go" value="GO!" id="go">
-        <br>
+        <% if user_signed_in? %>
+          <%= form_for @trip do |f| %>
+          <div>
+            <%= f.label :start %>
+            <%= f.text_field :start %>
+          </div>
+          <div>
+            <%= f.label :end %>
+            <%= f.text_field :end %>
+          </div>
+          <div>
+            <%= f.label :departure %>
+            <%= f.text_field :departure %>
+          </div>
+          <div>
+          </div>
+            <input type="button" name="trip_go" value="GO!" id="go">
+            <%= f.submit id: 'go', value: 'Save Trip!'%>
+            <% end %>
+        <% else %>
+          <label for="trip_start">Start: </label>
+          <input type="text" name="trip_start" id="trip_start" value="milwaukee">
+          <br>
+          <label for="trip_end">End: </label>
+          <input type="text" name="trip_end" id="trip_end" value="la crosse, wi">
+          <br>
+          <label for="trip_departure">Departure Time: </label>
+          <input type="text" name="trip_departure" id="trip_departure">
+          <br>
+          <input type="button" name="trip_go" value="GO!" id="go">
+          <br>
+        <% end %>
         <div id="tripDetails" style="display: none">
           <p>Travel time: <span id="tripTime"></span></p>
         </div>
@@ -48,13 +69,13 @@
       <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
       <script src="https://unpkg.com/flatpickr"></script>
       <script type="text/javascript">
-        flatpickr("#datetimepicker", {
+        flatpickr("#trip_departure", {
           defaultDate: Date.now(),
           enableTime: true,
           altInput: true,
           altFormat: "F j, Y h:i K"
         });
-      document.getElementById("datetimepicker").flatpickr(config);
+      document.getElementById("trip_departure").flatpickr(config);
       let calendar = new Flatpickr(element, config);
       $(".selector").flatpickr({});
     </script>

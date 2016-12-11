@@ -4,10 +4,11 @@
     <title>Tripcast2</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'false' %>
   </head>
   <link href="https://fonts.googleapis.com/css?family=Gudea|Hammersmith+One|Nunito+Sans" rel="stylesheet">
   <body>
+    <%= alert || notice %>
     <div class="navbar">
       <% if current_user.nil? %>
         <div class="navbar-left">
@@ -20,7 +21,7 @@
           <%= link_to "Hey #{current_user.first_name}!", user_path(current_user) %>
         </div>
       <% end %>
-      <div class="title">🔆 tripcast</div>
+      <div class="title"><a href="<%= root_path %>">🔆 tripcast</a></div>
     </div>
     <%= yield %>
   </body>

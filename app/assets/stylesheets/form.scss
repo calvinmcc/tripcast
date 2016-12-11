@@ -10,11 +10,12 @@ $form: 'Nunito Sans', sans-serif;
   display: flex;
   align-items: center;
   width: 50%;
-  margin-left: 35%;
+  margin-left: 25%;
   margin-top: 5%;
   font-family: $form;
   & input {
     margin-top: 1%;
+    margin-bottom: 3%;
     font-size: 14px;
     width: 100%;
     border: 2px solid white;
@@ -33,4 +34,8 @@ $form: 'Nunito Sans', sans-serif;
       margin-top: 2%;
     }
   }
+}
+
+.sign-in {
+  margin-right: 10%;
 }

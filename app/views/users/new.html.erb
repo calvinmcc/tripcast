@@ -1,4 +1,5 @@
 <div class="new-user">
+  <h3 class="sign-in">Sign Up:</h3>
   <%= form_for @user do |f| %>
     <div>
       <%= f.label :first_name %>
@@ -20,6 +21,6 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation %>
     </div>
-      <%= f.submit class: 'button' %>
+    <%= f.submit class: 'button' %>
   <% end %>
 </div>

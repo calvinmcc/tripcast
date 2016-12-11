@@ -127,10 +127,11 @@ html, body {
   border: none;
   font-family: $font;
   font-size: 1em;
-  transition: font-size 1s, padding 1s;
+  transition: background-color, 1s;
   &:hover {
-    font-size: 1.2em;
-    padding: 0.4em
+    background-color: rgba(179,220,237,1);
+    background: filter-gradient(#b3dced, $blue, horizontal);
+    background: background-image(linear-gradient(left, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%));
   }
   &:focus {
     outline: none;
@@ -142,6 +143,10 @@ html, body {
   margin-bottom: 0;
   border-bottom: none;
   border-top: 0.2em solid $accent;
+  z-index: 99999999;
+  color: white;
+  font-size: 2.2em;
+  text-align: right;
   img {
     position: relative;
     max-height: 1.2em;
@@ -157,4 +162,19 @@ html, body {
     width:100%;
     background: #000;
     display: none;
+}
+
+#error {
+  background-color: rgba(249, 83, 83, 0.64);
+  text-align: center;
+  font-family: $font;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  &:clicked {
+    color: inherit;
+  }
 }
