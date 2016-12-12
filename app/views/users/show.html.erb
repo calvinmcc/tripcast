@@ -1,0 +1,9 @@
+<h3>Your Trips:</h3>
+<% @trips.each do |trip| %>
+  <h1><%= link_to '🔆', trip %></h1>
+  <ul>
+    <li><%= trip.start %></li>
+    <li><%= trip.end %></li>
+    <li><%= trip.departure %></li>
+  </ul>
+<% end %>

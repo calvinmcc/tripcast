@@ -32,6 +32,10 @@
           <input type="button" name="trip_go" value="GO!" id="go">
           <%= f.submit id: 'go', value: 'Update Trip!'%>
           <% end %>
+          <%= link_to 'Delete Trip', trip_path(@trip),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" },
+                      id: 'go' %>
         <div id="tripDetails" style="display: none">
           <p>Travel time: <span id="tripTime"></span></p>
         </div>
