@@ -8,7 +8,9 @@ var gasWindows = [];
 var hotelMarkers = [];
 var hotelWindows = [];
 
+
 function initMap() {
+  Pace.start();
   var directionsService = new google.maps.DirectionsService();
   var directionsDisplay = new google.maps.DirectionsRenderer({
     draggable: false,
@@ -20,11 +22,12 @@ function initMap() {
     mapTypeId: 'hybrid'
   });
   google.maps.event.addDomListener(window, 'load', function () {
+    Pace.start();
     var start = new google.maps.places.Autocomplete(document.getElementById('trip_start'));
     var end = new google.maps.places.Autocomplete(document.getElementById('trip_end'));
     });
 
-  if (navigator.geolocation) {
+  if (navigator.geolocation && map !== undefined)  {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
         lat: position.coords.latitude,
@@ -127,7 +130,6 @@ var getDirectionData = function() {
           var from = origins[i];
           var to = destinations[j];
           $('#tripTime').html(duration);
-          // $('#tripDistance').html(distance);
         }
       }
     }
@@ -168,7 +170,6 @@ function addHotelMarker(hotelData) {
     addHotelWindow(location, marker, hotelObject)
   }
 }
-
 
 function addHotelWindow (location, marker, hotelObject) {
   var name = hotelObject.property_name

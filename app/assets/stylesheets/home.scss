@@ -21,6 +21,7 @@ $body: 'Gudea', sans-serif;
 }
 
 .navbar-left {
+  margin-left: 1%;
   text-align: left;
   width: 40%;
   display: inline-block;
@@ -32,11 +33,10 @@ $body: 'Gudea', sans-serif;
 }
 
 .title {
-  width: 50%;
+  width: 57%;
   position: relative;
   display: inline-block;
   margin-top: .7em;
-  margin-right: 1%;
   z-index: 99999999;
   color: white;
   font-size: 2.2em;

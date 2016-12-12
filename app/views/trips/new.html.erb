@@ -17,22 +17,22 @@
         <% if user_signed_in? %>
           <%= form_for @trip do |f| %>
           <div>
-            <%= f.label :start %>
+            <%= f.label :start, value: "Start:" %>
             <%= f.text_field :start %>
           </div>
           <div>
-            <%= f.label :end %>
+            <%= f.label :end, value: "End:" %>
             <%= f.text_field :end %>
           </div>
           <div>
-            <%= f.label :departure %>
+            <%= f.label :departure, value: "Departure time:" %>
             <%= f.text_field :departure %>
           </div>
           <div>
           </div>
             <input type="button" name="trip_go" value="GO!" id="go">
             <%= f.submit id: 'go', value: 'Save Trip!'%>
-            <% end %>
+          <% end %>
         <% else %>
           <label for="trip_start">Start: </label>
           <input type="text" name="trip_start" id="trip_start">
@@ -40,7 +40,7 @@
           <label for="trip_end">End: </label>
           <input type="text" name="trip_end" id="trip_end">
           <br>
-          <label for="trip_departure">Departure Time: </label>
+          <label for="trip_departure">Departure time: </label>
           <input type="text" name="trip_departure" id="trip_departure">
           <br>
           <input type="button" name="trip_go" value="GO!" id="go">
@@ -65,7 +65,8 @@
       </div>
       <div id="map"></div>
       <div id="footer"><img src="/assets/darksky.png" /></div>
-      <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GMAPS_KEY']%>&libraries=places&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GMAPS_KEY']%>&libraries=places&callback=initMap" async defer>
+      </script>
       <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
       <script src="https://unpkg.com/flatpickr"></script>
       <script type="text/javascript">

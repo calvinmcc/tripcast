@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tripcast2</title>
+    <title>Tripcast</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <link href="https://fonts.googleapis.com/css?family=Gudea|Hammersmith+One|Nunito+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Gudea|Hammersmith+One|Nunito+Sans" rel="stylesheet" />
   <body>
     <%= alert || notice %>
     <div class="navbar">
@@ -21,7 +21,7 @@
           <%= link_to "Hey #{current_user.first_name}!", user_path(current_user) %>
         </div>
       <% end %>
-      <div class="title"><%= link_to '🔆 tripcast', root_path %></div>
+      <div class="title"><a href="<%= root_path %>" data-turbolinks="false">🔆 tripcast</a></div>
     </div>
     <%= yield %>
   </body>
