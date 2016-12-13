@@ -1,11 +1,13 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bourbon";
+@import "users";
+@import "neat";
+@import "pace";
+@import "form";
 
 $blue: rgba(80, 185, 224, 0.6);
 $accent: rgba(207,231,167, 0.6);
 $input: rgba(207,231,167, 0.3);
-$yellow: #ffcb3c;
+$yellow: rgb(255, 203, 60);
 
 $font: 'Hammersmith One', sans-serif;
 $body: 'Gudea', sans-serif;
@@ -46,19 +48,11 @@ $body: 'Gudea', sans-serif;
   }
 }
 
-.gasIcon {
-  width: 50px;
-  height: 50px;
-  background-color: white;
-  position: absolute;
-  z-index: 99999999;
-  margin-top: 20%;
-  margin-left: 95%;
-}
-
-.hotelIcon {
-  @extend .gasIcon;
-  margin-top: 25%;
+#map {
+  height: 90%;
+  width: fill;
+  margin-left: 25%;
+  margin-right: 0;
 }
 
 input {
@@ -76,12 +70,6 @@ input {
   }
 }
 
-#map {
-  height: 90%;
-  width: 74%;
-  margin-left: 25%;
-  margin-right: 0;
-}
 html, body {
   height: 100%;
   margin: 0;
@@ -128,10 +116,12 @@ html, body {
   font-family: $font;
   font-size: 1em;
   transition: background-color, 1s;
+  cursor: pointer;
   &:hover {
     background-color: rgba(179,220,237,1);
     background: filter-gradient(#b3dced, $blue, horizontal);
-    background: background-image(linear-gradient(left, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%));
+    background: background-image(linear-gradient(left, rgba(179,220,237,1) 0%,
+    rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%));
   }
   &:focus {
     outline: none;
@@ -152,29 +142,181 @@ html, body {
     max-height: 1.2em;
   }
 }
-
-#lean_overlay {
-    position: fixed;
-    z-index:100;
-    top: 0px;
-    left: 0px;
-    height:100%;
-    width:100%;
-    background: #000;
-    display: none;
-}
-
-#error {
-  background-color: rgba(249, 83, 83, 0.64);
-  text-align: center;
-  font-family: $font;
-  color: white;
-}
+//
+// #error {
+//   background-color: rgba(249, 83, 83, 0.64);
+//   text-align: center;
+//   font-family: $font;
+//   color: white;
+// }
 
 a {
   text-decoration: none;
   color: inherit;
   &:clicked {
     color: inherit;
+  }
+}
+
+.label-switch {
+  $action-color: $blue !default;
+  $base-background-color: white !default;
+  $switch-width: 52px;
+  $switch-padding: 2px;
+  $switch-height: 24px;
+  $switch-radius: $switch-height;
+  $knob-size: $switch-height - ($switch-padding * 2);
+  $knob-radius: $switch-height - ($switch-padding * 2);
+  $knob-width: $knob-size;
+  $switch-background: $base-background-color;
+  $switch-border-background: darken($base-background-color, 9%);
+  $switch-shadow: 0 2px 5px transparentize(black, 0.6);
+
+  border-radius: $switch-radius;
+  cursor: pointer;
+  display: inline-block;
+  height: $switch-height;
+  position: relative;
+  width: $switch-width;
+
+  input[type="checkbox"] {
+    display: none;
+
+    + .checkbox {
+      background: $switch-border-background;
+      border: 0;
+      border-radius: $switch-radius;
+      cursor: pointer;
+      height: $switch-height;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      transition: all 0.3s ease;
+      width: $switch-width;
+      z-index: 0;
+
+      &::before {
+        @include position(absolute, 2px 0 0 2px);
+        background: $switch-background;
+        border-radius: $switch-radius;
+        content: "";
+        height: $knob-radius;
+        transform: scale(1);
+        transition: all 0.3s ease;
+        width: $switch-width - ($switch-padding * 2);
+        z-index: 1;
+      }
+
+      &::after {
+        @include position(absolute, 2px 0 0 2px);
+        @include size($knob-size);
+        background: $switch-background;
+        border-radius: $knob-radius;
+        box-shadow: $switch-shadow;
+        content: "";
+        transition: all 0.3s ease;
+        z-index: 2;
+      }
+    }
+
+    &:checked {
+      + .checkbox {
+        background: $blue;
+
+        &::before {
+          transform: scale(0);
+        }
+
+        &::after {
+          left: $switch-width - $knob-width - ($switch-padding);
+        }
+      }
+    }
+  }
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  $base-border-color: gainsboro !default;
+  $base-border-radius: 3px !default;
+  $base-background-color: white !default;
+  $base-spacing: 1.5em !default;
+  $action-color: #477DCA !default;
+  $dark-gray: #333 !default;
+  $base-font-color: $dark-gray !default;
+  $card-border-color: $base-border-color;
+  $card-border: 1px solid $card-border-color;
+  $card-background: lighten($card-border-color, 10%);
+  $card-header-background: $card-background;
+  $card-margin: 1em;
+  $card-image-hover-opacity: 0.7;
+  $card-image-hover-color: #F8F2B4;
+
+  background-color: $card-background;
+  border: $card-border;
+  border-radius: $base-border-radius;
+  box-shadow: 0 2px 4px darken($base-background-color, 10%);
+  cursor: pointer;
+  flex-basis: 15em;
+  flex-grow: 1;
+  margin: 0 $card-margin $base-spacing $card-margin;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  max-width: 300px;
+
+  .card-image {
+    background-color: $card-image-hover-color;
+    height: 150px;
+    max-height: 150px;
+    overflow: hidden;
+
+    img {
+      @include border-top-radius($base-border-radius);
+      opacity: 1;
+      transition: all 0.2s ease-in-out;
+      width: 100%;
+    }
+  }
+
+  .card-header {
+    background-color: $card-header-background;
+    border-bottom: $card-border;
+    border-radius: $base-border-radius $base-border-radius 0 0;
+    font-weight: bold;
+    line-height: 1.5em;
+    padding: ($base-spacing / 3) ($base-spacing / 2);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .card-copy {
+    font-size: 0.9em;
+    line-height: 1.5em;
+    padding: ($base-spacing / 2) ($base-spacing / 2);
+
+    p {
+      margin: 0 0 ($base-spacing / 2);
+    }
+  }
+
+  &:focus,
+  &:hover {
+    cursor: pointer;
+
+    img {
+      opacity: $card-image-hover-opacity;
+    }
+  }
+
+  &:active {
+    background-color: $card-background;
+
+    .card-header {
+      background-color: $card-background;
+    }
   }
 }

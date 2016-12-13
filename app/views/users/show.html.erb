@@ -1,9 +1,16 @@
 <h3>Your Trips:</h3>
 <% @trips.each do |trip| %>
-  <h1><%= link_to '🔆', trip %></h1>
-  <ul>
-    <li><%= trip.start %></li>
-    <li><%= trip.end %></li>
-    <li><%= trip.departure %></li>
-  </ul>
-<% end %>
+  <div class="cards">
+    <div class="card">
+      <div class="card-image">
+        <a href="/trips/<%= trip.id %>"><img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png" alt=""> </a>
+      </div>
+      <div class="card-header">
+        <%= trip.departure %>
+      </div>
+      <div class="card-copy">
+        <%= trip.start %> to <%= trip.end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
