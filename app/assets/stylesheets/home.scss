@@ -8,6 +8,9 @@ $blue: rgba(80, 185, 224, 0.6);
 $accent: rgba(207,231,167, 0.6);
 $input: rgba(207,231,167, 0.3);
 $yellow: rgb(255, 203, 60);
+$lightyellow: rgb(255, 234, 97);
+$red: rgb(238, 99, 99);
+$green: rgba(190, 227, 128, 1);
 
 $font: 'Hammersmith One', sans-serif;
 $body: 'Gudea', sans-serif;
@@ -15,29 +18,25 @@ $body: 'Gudea', sans-serif;
 .navbar {
   width: inherit;
   background-color: $blue;
-  height: 10%;
+  height: 70px;
   font-family: $font;
   padding-right: 1em;
   border-bottom: 0.2em solid $accent;
   z-index: 99999999;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 .navbar-left {
   margin-left: 1%;
   text-align: left;
-  width: 40%;
-  display: inline-block;
-  position: relative;
-  margin-top: .7em;
   margin-right: 1%;
   z-index: 99999999;
   color: white;
 }
 
 .title {
-  width: 57%;
-  position: relative;
-  display: inline-block;
   margin-top: .7em;
   z-index: 99999999;
   color: white;
@@ -88,7 +87,7 @@ html, body {
 }
 
 #stepList {
-  position: static;;
+  position: static;
   margin-top: 1%;
   clear: left;
   width:100%;
@@ -97,6 +96,7 @@ html, body {
   padding: 0;
   list-style-type: none;
   overflow: scroll;
+  z-index: -1;
 }
 
 .directionList {
@@ -105,26 +105,75 @@ html, body {
   border-bottom: 1px solid $blue;
 }
 
+.buttons {
+  width: 90%;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.options {
+  width: 90%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.option-labels {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 #go {
-  margin-top: 1%;
-  background-color: $blue;
-  color: white;
-  width: 80%;
-  padding: 0.6em;
-  border-radius: 3em;
+  width: 50px;
+  height: 50px;
+  background-color: $green;
+  color: black;
+  padding: .5em;
+  border-radius: 50%;
+  margin-left: 10px;
   border: none;
   font-family: $font;
-  font-size: 1em;
-  transition: background-color, 1s;
+  font-size: .9em;
+  transition: background-color, 1s, color, .25s;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
-    background-color: rgba(179,220,237,1);
-    background: filter-gradient(#b3dced, $blue, horizontal);
-    background: background-image(linear-gradient(left, rgba(179,220,237,1) 0%,
-    rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%));
+    background-color: darken($green, 20%);
+    color: white;
   }
   &:focus {
     outline: none;
+  }
+}
+
+#save {
+  @extend #go;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $lightyellow;
+  &:hover {
+    background-color: darken($lightyellow, 10%);
+  }
+}
+
+#delete {
+  @extend #go;
+  margin-top: 1%;
+  background-color: $red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: .5em;
+  &:hover {
+    background-color: darken($red, 20%);
   }
 }
 
@@ -161,9 +210,9 @@ a {
 .label-switch {
   $action-color: $blue !default;
   $base-background-color: white !default;
-  $switch-width: 52px;
+  $switch-width: 40px;
   $switch-padding: 2px;
-  $switch-height: 24px;
+  $switch-height: 20px;
   $switch-radius: $switch-height;
   $knob-size: $switch-height - ($switch-padding * 2);
   $knob-radius: $switch-height - ($switch-padding * 2);
@@ -184,6 +233,7 @@ a {
 
     + .checkbox {
       background: $switch-border-background;
+      display: inline-block;
       border: 0;
       border-radius: $switch-radius;
       cursor: pointer;

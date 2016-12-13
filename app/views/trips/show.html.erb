@@ -21,25 +21,33 @@
         </div>
         <div>
         </div>
-        <div>
-          <label class="label-switch">
-            <input type="checkbox" id="gas"/>
-            Gas
-            <div class="checkbox"></div>
-          </label>
-          <label class="label-switch">
-            Hotel
-            <input type="checkbox" id="hotel"/>
-            <div class="checkbox"></div>
-          </label>
-        </div>
-          <input type="button" name="trip_go" value="GO!" id="go">
-          <%= f.submit id: 'go', value: 'Update Trip!'%>
-          <% end %>
-          <%= link_to 'Delete Trip', trip_path(@trip),
-                      method: :delete,
-                      data: { confirm: "Are you sure?" },
-                      id: 'go' %>
+          <div class="options">
+            <div class="option-labels">
+              <div>Gas: &nbsp;
+              </div>
+              <label class="label-switch">
+                <input type="checkbox" id="gas"/>
+                <div class="checkbox"></div>
+              </label>
+            </div>
+            <div class="option-labels">
+              <div>Hotel: &nbsp;
+              </div>
+              <label class="label-switch">
+                <input type="checkbox" id="hotel"/>
+                <div class="checkbox"></div>
+              </label>
+            </div>
+          </div>
+          <div class="buttons">
+            <input type="button" name="trip_go" value="GO" id="go">
+            <%= f.submit id: 'save', value: 'SAVE'%>
+            <% end %>
+            <%= link_to 'DELETE', trip_path(@trip),
+                        method: :delete,
+                        data: { confirm: "Are you sure?" },
+                        id: 'delete' %>
+          </div>
         <div id="tripDetails" style="display: none">
           <p>Travel time: <span id="tripTime"></span></p>
         </div>

@@ -5,18 +5,6 @@
     <title></title>
   </head>
     <body>
-      <!-- <div class="options">
-        <div class="icon">
-          <div>
-            <label for="gas">⛽️</label>
-            <input type="checkbox" id="gas">
-          </div>
-          <div>
-            <label for="hotel">🏨</label>
-            <input type="checkbox" id="hotel">
-          </div>
-        </div>
-      </div> -->
       <div id="directionsPanel">
         <% if user_signed_in? %>
           <%= form_for @trip do |f| %>
@@ -32,20 +20,28 @@
             <%= f.label :departure, value: "Departure time:" %>
             <%= f.text_field :departure %>
           </div>
-          <div>
-            <label class="label-switch">
-              <input type="checkbox" id="gas"/>
-              Gas
-              <div class="checkbox"></div>
-            </label>
-            <label class="label-switch">
-              Hotel
-              <input type="checkbox" id="hotel"/>
-              <div class="checkbox"></div>
-            </label>
+            <div class="options">
+              <div class="option-labels">
+                <div>Gas: &nbsp;
+                </div>
+                <label class="label-switch">
+                  <input type="checkbox" id="gas"/>
+                  <div class="checkbox"></div>
+                </label>
+              </div>
+              <div class="option-labels">
+                <div>Hotel: &nbsp;
+                </div>
+                <label class="label-switch">
+                  <input type="checkbox" id="hotel"/>
+                  <div class="checkbox"></div>
+                </label>
+              </div>
+            </div>
+          <div class="buttons">
+            <input type="button" name="trip_go" value="GO" id="go">
+            <%= f.submit id: 'save', value: 'SAVE'%>
           </div>
-            <input type="button" name="trip_go" value="GO!" id="go">
-            <%= f.submit id: 'go', value: 'Save Trip!'%>
           <% end %>
         <% else %>
           <label for="trip_start">Start: </label>
@@ -57,17 +53,27 @@
           <label for="trip_departure">Departure time: </label>
           <input type="text" name="trip_departure" id="trip_departure">
           <br>
-          <label class="label-switch">
-            <input type="checkbox" id="gas"/>
-            Gas
-            <div class="checkbox"></div>
-          </label>
-          <label class="label-switch">
-            Hotel
-            <input type="checkbox" id="hotel"/>
-            <div class="checkbox"></div>
-          </label>
-          <input type="button" name="trip_go" value="GO!" id="go">
+          <div class="options">
+            <div class="option-labels">
+              <div>Gas: &nbsp;
+              </div>
+              <label class="label-switch">
+                <input type="checkbox" id="gas"/>
+                <div class="checkbox"></div>
+              </label>
+            </div>
+            <div class="option-labels">
+              <div>Hotel: &nbsp;
+              </div>
+              <label class="label-switch">
+                <input type="checkbox" id="hotel"/>
+                <div class="checkbox"></div>
+              </label>
+            </div>
+          </div>
+          <div class="buttons">
+            <input type="button" name="trip_go" value="GO" id="go">
+          </div>
           <br>
         <% end %>
         <div id="tripDetails" style="display: none">
