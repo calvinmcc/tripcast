@@ -5,6 +5,7 @@
     <title></title>
   </head>
     <body>
+    <main>
       <div id="directionsPanel">
         <% if user_signed_in? %>
           <%= form_for @trip do |f| %>
@@ -103,8 +104,8 @@
           {{/.}}
           </script>
         </div>
-      </div>
-      <div id="map"></div>
+        <div id="map"></div>
+      </main>
       <div id="footer"><img src="/assets/darksky.png" /></div>
       <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GMAPS_KEY']%>&libraries=places&callback=initMap" async defer>
       </script>

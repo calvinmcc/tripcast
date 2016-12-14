@@ -1,97 +1,89 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-    <body>
-      <div id="directionsPanel">
-        <%= form_for @trip do |f| %>
-        <div>
-          <%= f.label :start %>
-          <%= f.text_field :start, value: @trip.start %>
-        </div>
-        <div>
-          <%= f.label :end %>
-          <%= f.text_field :end, value: @trip.end %>
-        </div>
-        <div>
-          <%= f.label :departure %>
-          <%= f.text_field :departure, value: @trip.departure %>
-        </div>
-        <div>
-        </div>
-          <div class="options">
-            <div class="option-labels">
-              <div>Gas: &nbsp;
-              </div>
-              <label class="label-switch">
-                <input type="checkbox" id="gas"/>
-                <div class="checkbox"></div>
-              </label>
-            </div>
-            <div class="option-labels">
-              <div>Hotel: &nbsp;
-              </div>
-              <label class="label-switch">
-                <input type="checkbox" id="hotel"/>
-                <div class="checkbox"></div>
-              </label>
-            </div>
-            <div class="tooltip-item">
-                ?
-                <div class="tooltip">
-                  <p>Double-click the map to find gas and hotels!</p>
-                </div>
-            </div>
+<main>
+  <div id="directionsPanel">
+    <%= form_for @trip do |f| %>
+    <div>
+      <%= f.label :start %>
+      <%= f.text_field :start, value: @trip.start %>
+    </div>
+    <div>
+      <%= f.label :end %>
+      <%= f.text_field :end, value: @trip.end %>
+    </div>
+    <div>
+      <%= f.label :departure %>
+      <%= f.text_field :departure, value: @trip.departure %>
+    </div>
+    <div>
+    </div>
+      <div class="options">
+        <div class="option-labels">
+          <div>Gas: &nbsp;
           </div>
-          <div class="buttons">
-            <input type="button" name="trip_go" value="GO" id="go">
-            <%= f.submit id: 'save', value: 'SAVE'%>
-            <% end %>
-            <%= link_to 'DELETE', trip_path(@trip),
-                        method: :delete,
-                        data: { confirm: "Are you sure?" },
-                        id: 'delete' %>
-          </div>
-        <div id="tripDetails" style="display: none">
-          <p>Travel time: <span id="tripTime"></span></p>
+          <label class="label-switch">
+            <input type="checkbox" id="gas"/>
+            <div class="checkbox"></div>
+          </label>
         </div>
-        <ul id="stepList"></ul>
-          <script type="x-tmpl-mustache" id="stepTemp">
-          {{#.}}
-          <li id={{i}} class="directionList">
-            <div class="comment">
-              <div class="comment-image">
-                <img src="/assets/{{weatherData.currently.icon}}">
-              </div>
-              <div class="comment-content">
-                <h1>{{{step}}}</h1>
-                <p>{{weatherData.currently.summary}}</p>
-                <p class="comment-detail">{{temp}}&deg;F, {{{precip}}}% chance of precipitation</p>
-              </div>
+        <div class="option-labels">
+          <div>Hotel: &nbsp;
+          </div>
+          <label class="label-switch">
+            <input type="checkbox" id="hotel"/>
+            <div class="checkbox"></div>
+          </label>
+        </div>
+        <div class="tooltip-item">
+            ?
+            <div class="tooltip">
+              <p>Double-click the map to find gas and hotels!</p>
             </div>
-            </li>
-          {{/.}}
-          </script>
         </div>
       </div>
-      <div id="map"></div>
-      <div id="footer"><img src="/assets/darksky.png" /></div>
-      <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GMAPS_KEY']%>&libraries=places&callback=initMap" async defer></script>
-      <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
-      <script src="https://unpkg.com/flatpickr"></script>
-      <script type="text/javascript">
-        flatpickr("#trip_departure", {
-          defaultDate: "<%= @trip.departure  %>",
-          enableTime: true,
-          altInput: true,
-          altFormat: "F j, Y h:i K"
-        });
-      document.getElementById("trip_departure").flatpickr(config);
-      let calendar = new Flatpickr(element, config);
-      $(".selector").flatpickr({});
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
-  </body>
-</html>
+      <div class="buttons">
+        <input type="button" name="trip_go" value="GO" id="go">
+        <%= f.submit id: 'save', value: 'SAVE'%>
+        <% end %>
+        <%= link_to 'DELETE', trip_path(@trip),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" },
+                    id: 'delete' %>
+      </div>
+    <div id="tripDetails" style="display: none">
+      <p>Travel time: <span id="tripTime"></span></p>
+    </div>
+    <ul id="stepList"></ul>
+      <script type="x-tmpl-mustache" id="stepTemp">
+      {{#.}}
+      <li id={{i}} class="directionList">
+        <div class="comment">
+          <div class="comment-image">
+            <img src="/assets/{{weatherData.currently.icon}}">
+          </div>
+          <div class="comment-content">
+            <h1>{{{step}}}</h1>
+            <p>{{weatherData.currently.summary}}</p>
+            <p class="comment-detail">{{temp}}&deg;F, {{{precip}}}% chance of precipitation</p>
+          </div>
+        </div>
+        </li>
+      {{/.}}
+      </script>
+    </div>
+  <div id="map"></div>
+</main>
+<div id="footer"><img src="/assets/darksky.png" /></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GMAPS_KEY']%>&libraries=places&callback=initMap" async defer></script>
+<link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
+<script src="https://unpkg.com/flatpickr"></script>
+<script type="text/javascript">
+  flatpickr("#trip_departure", {
+    defaultDate: "<%= @trip.departure  %>",
+    enableTime: true,
+    altInput: true,
+    altFormat: "F j, Y h:i K"
+  });
+  document.getElementById("trip_departure").flatpickr(config);
+  let calendar = new Flatpickr(element, config);
+  $(".selector").flatpickr({});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>

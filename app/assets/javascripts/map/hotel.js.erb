@@ -37,7 +37,7 @@ function addHotelWindow (location, marker, hotelObject) {
   var name = hotelObject.property_name
   var price = hotelObject.total_price.amount
   var address = hotelObject.address
-  var hotelForecast = `<div id="hotelForecast">
+  var hotelForecast = `<div id="forecast">
                         <h3>${name}</h3>
                         <h2>Total Price: $${price} USD</h2>
                         <h4>${address.line1}</h4>

@@ -16,8 +16,8 @@
         </div>
       <% else %>
         <div class="navbar-left">
-          <%= link_to 'Sign Out', sessions_path, method: :delete %> |
-          <%= link_to "Hey #{current_user.first_name}!", user_path(current_user) %>
+          <%= link_to "Hey #{current_user.first_name}!", user_path(current_user) %> |
+          <%= link_to 'Sign Out', sessions_path, method: :delete %>
         </div>
       <% end %>
       <div class="title"><a href="<%= root_path %>" data-turbolinks="false">🔆 tripcast</a></div>

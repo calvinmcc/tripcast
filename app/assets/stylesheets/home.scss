@@ -18,14 +18,22 @@ $body: 'Gudea', sans-serif;
 .navbar {
   width: inherit;
   background-color: $blue;
-  height: 70px;
   font-family: $font;
-  padding-right: 1em;
+  padding-right: 3px;
   border-bottom: 0.2em solid $accent;
   z-index: 99999999;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  flex-basis: 70px;
+  flex-shrink: 0;
+}
+
+main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  display: flex;
+  height: 100%;
 }
 
 .navbar-left {
@@ -34,9 +42,11 @@ $body: 'Gudea', sans-serif;
   margin-right: 1%;
   z-index: 99999999;
   color: white;
+  font-family: $body;
+  letter-spacing: 1.2px;
   transition: color, .5s;
   & a:hover {
-    color: $lightyellow;
+    color: rgb(254, 255, 190);
   }
 }
 
@@ -60,10 +70,13 @@ $body: 'Gudea', sans-serif;
 }
 
 #map {
-  height: 90%;
-  width: fill;
-  margin-left: 25%;
+  height: 100%;
+  width: 100%;
   margin-right: 0;
+  position: relative;
+  overflow: hidden;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 
 .alert {
@@ -95,34 +108,29 @@ html, body {
   margin: 0;
   padding: 0;
   position: static;
+  display: flex;
+  flex-flow: column;
 }
 
 #directionsPanel {
+  display: flex;
+  flex-flow: column;
+  position: relative;
   font-family: $body;
   background-color: white;
   padding-top: 1%;
-  padding-left: 1%;
-  float:left;
-  width: 25%;
-  height: 88%;
+  width: 30%;
+  height: 100%;
 }
 
 #stepList {
-  clear: left;
+  position: relative;
   width: 100%;
-  height: auto;
-  max-height: 52%;
+  height: 100%;
   list-style: none;
   padding: 0;
   list-style-type: none;
   overflow: scroll;
-}
-
-#number {
-  width: 15px;
-  height: auto;
-  display: flex;
-  align-self: flex-start;
 }
 
 #instruction {
@@ -209,10 +217,14 @@ html, body {
   @extend .navbar;
   margin-bottom: 0;
   border-bottom: none;
-  border-top: 0.2em solid $accent;
+  border-top: 0.1em solid $accent;
   color: white;
   font-size: 2.2em;
   justify-content: flex-end;
+  z-index: 0;
+  flex-basis: 50px;
+  flex-grow: 0;
+  flex-shrink: 1;
   img {
     position: relative;
     max-height: 1.2em;

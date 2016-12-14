@@ -50,9 +50,9 @@ function addGasMarker(gasData) {
 function addGasWindow (location, marker, gasObject) {
   var stationName = gasObject.station
   var price = gasObject.reg_price
-  var gasForecast = `<div id="gasForecast">
+  var gasForecast = `<div id="forecast">
                       <h3>${stationName}</h3>
-                      <h2>Average price: ${price}</h2>
+                      <h2>Average price: $${price}/gallon USD</h2>
                     </div>`
   var gasWindow = new google.maps.InfoWindow({
     content: gasForecast,
