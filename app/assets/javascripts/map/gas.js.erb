@@ -1,0 +1,80 @@
+function getGasPrices(lat, lng) {
+  Pace.restart();
+  $.ajax({
+    url: `http://api.mygasfeed.com/stations/radius/${lat}/${lng}/10/reg/price/<%= ENV['GAS_KEY'] %>.json?callback=?`,
+    dataType: "jsonp",
+    success: function(data) {
+      var gasData = data
+      gas = gasData
+      addGasMarker(gasData)
+    }
+  });
+}
+
+function addGasMarker(gasData) {
+  var stations = gasData.stations
+  if (stations.length > 10) {
+    for (var i = 0; i < 10; i++) {
+      var lat = stations[i].lat;
+      var lng = stations[i].lng;
+      var gasObject = stations[i];
+      var location = { lat: parseFloat(lat), lng: parseFloat(lng) };
+      marker = new google.maps.Marker({
+        icon: '/assets/gas-icon.png',
+        animation: google.maps.Animation.DROP,
+        position: location,
+        map: map
+      });
+      gasMarkers.push(marker)
+      addGasWindow(location, marker, gasObject)
+    }
+  } else {
+    for (var i = 0; i <= stations.length; i++) {
+      var lat = stations[i].lat;
+      var lng = stations[i].lng;
+      var gasObject = stations[i];
+      var location = { lat: parseFloat(lat), lng: parseFloat(lng) };
+      marker = new google.maps.Marker({
+        icon: '/assets/gas-icon.png',
+        animation: google.maps.Animation.DROP,
+        position: location,
+        map: map
+      });
+      gasMarkers.push(marker)
+      addGasWindow(location, marker, gasObject)
+    }
+  }
+}
+
+
+function addGasWindow (location, marker, gasObject) {
+  var stationName = gasObject.station
+  var price = gasObject.reg_price
+  var gasForecast = `<div id="gasForecast">
+                      <h3>${stationName}</h3>
+                      <h2>Average price: ${price}</h2>
+                    </div>`
+  var gasWindow = new google.maps.InfoWindow({
+    content: gasForecast,
+    map: map,
+    location: location
+  })
+  gasWindows.push(gasWindow);
+  gasWindow.close();
+  marker.addListener('click', function(){
+    clearGasWindows();
+    gasWindow.open(map, marker);
+  });
+}
+
+function clearGasMarkers() {
+  for (var i=0; i<gasMarkers.length; i++) {
+    gasMarkers[i].setMap(null)
+  }
+}
+
+function clearGasWindows() {
+  for (var i=0; i <gasWindows.length; i++) {
+    gasWindows[i].close();
+  }
+}
