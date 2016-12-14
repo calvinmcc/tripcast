@@ -1,6 +1,6 @@
-<h3>Your Trips:</h3>
+<h4 class="trip-title">Your Trips:</h4>
+<div class="cards">
 <% @trips.each do |trip| %>
-  <div class="cards">
     <div class="card">
       <div class="card-image">
         <a href="/trips/<%= trip.id %>"><img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png" alt=""> </a>
@@ -12,5 +12,18 @@
         <%= trip.start %> to <%= trip.end %>
       </div>
     </div>
-    <% end %>
-  </div>
+  <% end %>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<script type="text/javascript">
+  $(function(){
+    var cardNumber = $('.card-header').length;
+    var cards = $('.card-header');
+    for (var i = 0; i < cardNumber; i++) {
+      var cardTitle = $(cards[i]).html();
+      var timeString = moment(cardTitle,  "YYYY-MM-DD HH:mm").format('LLL');
+      $(cards[i]).html(timeString);
+    }
+  })
+</script>
