@@ -66,6 +66,15 @@ $body: 'Gudea', sans-serif;
   margin-right: 0;
 }
 
+.alert {
+  color: red;
+  text-decoration: underline;
+}
+
+#forecast {
+  font-family: $body;
+}
+
 input {
   margin-top: 1%;
   font-size: 14px;

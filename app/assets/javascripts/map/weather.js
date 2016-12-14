@@ -1,12 +1,23 @@
 function addInfoWindow (location, marker, weatherData) {
   var localTime = new Date(weatherData.currently.time * 1000);
-  var precip = Math.floor(weatherData.currently.precipProbability * 100)
-  var temp = weatherData.currently.apparentTemperature
-  var summary = weatherData.currently.summary
+  var timeAsString = moment(localTime,  "YYYY-MM-DD HH:mm").format('LLL');
+  var precip = Math.floor(weatherData.currently.precipProbability * 100);
+  var temp = Math.floor(weatherData.currently.apparentTemperature);
+  var summary = weatherData.currently.summary;
+  if (weatherData.alerts !== undefined) {
+    var alertLink = weatherData.alerts[0].uri;
+    var alertName = 'Weather Alert';
+    var alertClass = 'alert'
+  } else {
+    var alertLink = '#';
+    var alertName = 'No Weather Alerts';
+    var alertClass = '';
+  }
   var forecast = `<div id="forecast">
-                    <h3>Expected conditions at ${localTime}</h3>
-                    <h5>${summary} and ${temp}&deg;F</h6>
-                    <h6>${precip}% Chance of Precipitation</h6>
+                    <h3>Expected conditions at ${timeAsString}</h3>
+                    <h5><span id="bold">${summary}</span> and <span id="bold">${temp}</span>&deg;F</h5>
+                    <h5><span id="bold">${precip}%</span> Chance of Precipitation</h5>
+                    <h5 class="${alertClass}"><a href="${alertLink}">${alertName}</a></h5>
                   </div>`
   var infowindow = new google.maps.InfoWindow({
     content: forecast,
