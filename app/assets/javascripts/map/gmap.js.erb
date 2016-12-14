@@ -373,6 +373,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
       var lat = (mapObject[i].start_location.lat(mapObject[i].start_location.lng));
       var lng = (mapObject[i].start_location.lng(mapObject[i].start_location.lat));
       var instructions = mapObject[i].instructions
+      console.log(mapObject[i]);
       weatherCoords = { lat: parseFloat(lat), lng: parseFloat(lng) };
       if (i === 0) {
         var milliseconds = Date.parse(time)

@@ -82,12 +82,17 @@
         <ul id="stepList"></ul>
           <script type="x-tmpl-mustache" id="stepTemp">
           {{#.}}
-            <li id={{i}} class="directionList">
-              {{i}}
-              {{{step}}},
-              {{weatherData.currently.summary}},
-              {{{precip}}}% chance of precipitation,
-              {{temp}}&deg;F
+          <li id={{i}} class="directionList">
+            <div class="comment">
+              <div class="comment-image">
+                <img src="/assets/{{weatherData.currently.icon}}">
+              </div>
+              <div class="comment-content">
+                <h1>{{{step}}}</h1>
+                <p>{{weatherData.currently.summary}}</p>
+                <p class="comment-detail">{{temp}}&deg;F, {{{precip}}}% chance of precipitation</p>
+              </div>
+            </div>
             </li>
           {{/.}}
           </script>
