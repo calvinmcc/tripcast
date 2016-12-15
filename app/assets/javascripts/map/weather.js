@@ -15,7 +15,14 @@ function addInfoWindow(location, marker, weatherData) {
     var alertName = 'No Weather Alerts';
     var alertClass = '';
   }
-  var forecast = '<div id="forecast">\n                    <h3>Expected conditions at ' + timeAsString + '</h3>\n                    <h5><span id="bold">' + summary + '</span> and <span id="bold">' + temp + '</span>&deg;F</h5>\n                    <h5><span id="bold">' + precip + '%</span> Chance of Precipitation</h5>\n                    <h5 class="' + alertClass + '"><a href="' + alertLink + '">' + alertName + '</a></h5>\n                  </div>';
+  var forecast = '<div id="forecast">\n  <h3>Expected conditions at '
+                  + timeAsString +
+                  '</h3>\n <h5><span id="bold">' + summary +
+                  '</span> and <span id="bold">' + temp +
+                  '</span>&deg;F</h5>\n <h5><span id="bold">' + precip +
+                  '%</span> Chance of Precipitation</h5>\n  <h5 class="'
+                  + alertClass + '"><a href="' + alertLink + '">' + alertName +
+                  '</a></h5>\n </div>';
   var infowindow = new google.maps.InfoWindow({
     content: forecast,
     map: map,
@@ -43,7 +50,7 @@ function clearInfoWindows() {
 
 function addMarker(location, weatherData, weatherIcon) {
   marker = new google.maps.Marker({
-    icon: '/assets/' + weatherIcon,
+    icon: iconPaths[weatherIcon],
     animation: google.maps.Animation.DROP,
     position: location,
     map: map

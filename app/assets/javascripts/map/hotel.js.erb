@@ -24,7 +24,7 @@ function addHotelMarker(hotelData) {
     var location = { lat: parseFloat(lat), lng: parseFloat(lng) };
     marker = new google.maps.Marker({
       position: location,
-      icon: '/assets/hotel-icon.png',
+      icon: "<%= asset_path('hotel-icon.png') %>",
       animation: google.maps.Animation.DROP,
       map: map
     });
@@ -37,7 +37,12 @@ function addHotelWindow(location, marker, hotelObject) {
   var name = hotelObject.property_name;
   var price = hotelObject.total_price.amount;
   var address = hotelObject.address;
-  var hotelForecast = '<div id="forecast">\n                        <h3>' + name + '</h3>\n                        <h2>Total Price: $' + price + ' USD</h2>\n                        <h4>' + address.line1 + '</h4>\n                        <h4>' + address.city + ', ' + address.region + ' ' + address.postal_code + '</h4>\n                      </div>';
+  var hotelForecast = '<div id="forecast">\n <h3>'
+                       + name + '</h3>\n <h2>Total Price: $'
+                       + price + ' USD</h2>\n <h4>'
+                       + address.line1 + '</h4>\n <h4>'
+                       + address.city + ', ' + address.region + ' '
+                       + address.postal_code + '</h4>\n </div>';
   var hotelWindow = new google.maps.InfoWindow({
     content: hotelForecast,
     map: map,
