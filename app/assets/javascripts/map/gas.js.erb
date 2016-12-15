@@ -17,7 +17,7 @@ function addGasMarker(gasData) {
       var gasObject = stations[i];
       var location = { lat: parseFloat(lat), lng: parseFloat(lng) };
       marker = new google.maps.Marker({
-        icon: "<%= image_path('/assets/gas-icon.png') %>",
+        icon: "<%= asset_path('/assets/gas-icon.png') %>",
         animation: google.maps.Animation.DROP,
         position: location,
         map: map
@@ -32,7 +32,7 @@ function addGasMarker(gasData) {
       var gasObject = stations[i];
       var location = { lat: parseFloat(lat), lng: parseFloat(lng) };
       marker = new google.maps.Marker({
-        icon: "<%= image_path('/assets/gas-icon.png') %>",
+        icon: "<%= asset_path('/assets/gas-icon.png') %>",
         animation: google.maps.Animation.DROP,
         position: location,
         map: map
