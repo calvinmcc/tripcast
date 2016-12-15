@@ -31,7 +31,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     }
     var time = Math.floor(milliseconds / 1000);
     $.ajax({
-      url: 'https://api.darksky.net/forecast<%= ENV['WEATHER_KEY'] %>/' + lat + ',' + lng + ',' + time + '?',
+      url: 'https://api.darksky.net/forecast/<%= ENV['WEATHER_KEY'] %>/' + lat + ',' + lng + ',' + time + '?',
       dataType: "jsonp",
       success: function success(parsed_json) {
         var weatherData = parsed_json;
