@@ -51,7 +51,9 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             i: i + 1,
             weatherData: weatherData,
             temp: temp,
-            precip: precipProb });
+            precip: precipProb,
+            icon: iconPaths[weatherIcon]
+           });
         } else {
           renderSteps(steps);
         }
