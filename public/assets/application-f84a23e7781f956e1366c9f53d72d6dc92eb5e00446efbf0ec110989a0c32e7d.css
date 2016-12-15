@@ -1,0 +1,750 @@
+@charset "UTF-8";
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+ */
+/* line 4, /Users/Calvin/.rvm/gems/ruby-2.3.0/gems/neat-1.8.0/app/assets/stylesheets/grid/_box-sizing.scss */
+html {
+  box-sizing: border-box;
+}
+
+/* line 9, /Users/Calvin/.rvm/gems/ruby-2.3.0/gems/neat-1.8.0/app/assets/stylesheets/grid/_box-sizing.scss */
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+
+/* line 2, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/pace.scss */
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  z-index: 2000;
+  position: fixed;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  width: 200px;
+  background: #fff;
+  border: 1px solid #ffcb3c;
+  overflow: hidden;
+}
+
+/* line 24, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/pace.scss */
+.pace .pace-progress {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  max-width: 200px;
+  position: fixed;
+  z-index: 2000;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 100%;
+  height: 100%;
+  width: 100%;
+  background: #ffe55e;
+}
+
+/* line 49, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/pace.scss */
+.pace.pace-inactive {
+  display: none;
+}
+
+/* line 4, /Users/Calvin/.rvm/gems/ruby-2.3.0/gems/neat-1.8.0/app/assets/stylesheets/grid/_box-sizing.scss */
+html {
+  box-sizing: border-box;
+}
+
+/* line 9, /Users/Calvin/.rvm/gems/ruby-2.3.0/gems/neat-1.8.0/app/assets/stylesheets/grid/_box-sizing.scss */
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+
+/* line 2, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/pace.scss */
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  z-index: 2000;
+  position: fixed;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  width: 200px;
+  background: #fff;
+  border: 1px solid #ffcb3c;
+  overflow: hidden;
+}
+
+/* line 24, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/pace.scss */
+.pace .pace-progress {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  max-width: 200px;
+  position: fixed;
+  z-index: 2000;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 100%;
+  height: 100%;
+  width: 100%;
+  background: #ffe55e;
+}
+
+/* line 49, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/pace.scss */
+.pace.pace-inactive {
+  display: none;
+}
+
+/* line 14, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/form.scss */
+.new-user {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 5%;
+  font-family: "Nunito Sans", sans-serif;
+}
+/* line 21, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/form.scss */
+.new-user input {
+  margin-top: 1%;
+  margin-bottom: 3%;
+  font-size: 14px;
+  width: 100%;
+  border: 2px solid white;
+  border-bottom-color: rgba(111, 144, 55, 0.62);
+  transition: border 1s;
+  height: 2em;
+}
+/* line 30, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/form.scss */
+.new-user input:focus {
+  outline: none;
+  border: 2px solid rgba(122, 189, 109, 0.6);
+}
+/* line 34, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/form.scss */
+.new-user input.button {
+  width: 100%;
+  background-color: rgba(80, 185, 224, 0.6);
+  border-radius: 10px;
+  border: none;
+  margin-top: 2%;
+}
+
+/* line 44, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/form.scss */
+.sign-in {
+  margin-right: 10%;
+}
+
+/* line 18, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.navbar, #footer {
+  width: inherit;
+  background-color: rgba(80, 185, 224, 0.6);
+  font-family: "Hammersmith One", sans-serif;
+  padding-right: 3px;
+  border-bottom: 0.2em solid rgba(207, 231, 167, 0.6);
+  z-index: 99999999;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-basis: 70px;
+  flex-shrink: 0;
+}
+
+/* line 32, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+main {
+  flex-shrink: 1;
+  flex-grow: 1;
+  display: flex;
+  height: 100%;
+}
+
+/* line 39, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.navbar-left {
+  margin-left: .5%;
+  text-align: left;
+  margin-right: 1%;
+  z-index: 99999999;
+  color: white;
+  font-family: "Gudea", sans-serif;
+  letter-spacing: 1.2px;
+  transition: color, .5s;
+}
+/* line 48, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.navbar-left a:hover {
+  color: #feffbe;
+}
+
+/* line 53, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.clickInstructions {
+  position: absolute;
+  color: white;
+  margin-top: 150px;
+  margin-left: 500px;
+  z-index: 999999999999;
+}
+
+/* line 61, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.title {
+  margin-top: .7em;
+  z-index: 99999999;
+  color: white;
+  font-size: 2.2em;
+  text-align: right;
+}
+/* line 67, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.titleimg {
+  display: inline;
+}
+
+/* line 72, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#map {
+  height: 100%;
+  width: 100%;
+  margin-right: 0;
+  position: relative;
+  overflow: hidden;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+/* line 82, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.alert {
+  color: red;
+  text-decoration: underline;
+}
+
+/* line 87, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#forecast {
+  font-family: "Gudea", sans-serif;
+}
+
+/* line 91, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+input {
+  margin-top: 1%;
+  font-size: 14px;
+  font-family: "Gudea", sans-serif;
+  width: 98%;
+  border: 1px solid white;
+  border-bottom-color: rgba(207, 231, 167, 0.3);
+  transition: border 1s;
+  height: 2em;
+}
+/* line 100, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+input:focus {
+  outline: none;
+  border: 1px solid rgba(207, 231, 167, 0.6);
+}
+
+/* line 106, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: static;
+  display: flex;
+  flex-flow: column;
+}
+
+/* line 115, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#directionsPanel {
+  display: flex;
+  flex-flow: column;
+  position: relative;
+  font-family: "Gudea", sans-serif;
+  background-color: white;
+  padding-top: 1%;
+  width: 30%;
+  height: 100%;
+}
+
+/* line 126, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#stepList {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  padding: 0;
+  list-style-type: none;
+  overflow: scroll;
+}
+
+/* line 136, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#instruction {
+  display: flex;
+}
+
+/* line 140, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.directionList {
+  max-height: inherit;
+}
+
+/* line 144, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.buttons {
+  width: 90%;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+/* line 151, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.options {
+  width: 90%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+/* line 159, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.option-labels {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/* line 165, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#go, #save, #delete {
+  width: 50px;
+  height: 50px;
+  background-color: #bee380;
+  color: black;
+  padding: .5em;
+  border-radius: 50%;
+  margin-left: 10px;
+  border: none;
+  font-family: "Hammersmith One", sans-serif;
+  font-size: .9em;
+  transition: background-color, 1s, color, .25s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* line 181, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#go:hover, #save:hover, #delete:hover {
+  background-color: #93cf2e;
+  color: white;
+}
+/* line 185, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#go:focus, #save:focus, #delete:focus {
+  outline: none;
+}
+
+/* line 190, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#save {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffea61;
+}
+/* line 196, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#save:hover {
+  background-color: #ffe224;
+}
+
+/* line 201, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#delete {
+  margin-top: 1%;
+  background-color: #ee6363;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: .5em;
+}
+/* line 211, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#delete:hover {
+  background-color: #d41717;
+}
+
+/* line 216, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#footer {
+  margin-bottom: 0;
+  border-bottom: none;
+  border-top: 0.1em solid rgba(207, 231, 167, 0.6);
+  color: white;
+  font-size: 2.2em;
+  justify-content: flex-end;
+  z-index: 0;
+  flex-basis: 60px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+/* line 228, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+#footer img {
+  position: relative;
+  max-height: 1.2em;
+}
+
+/* line 234, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color, .5s;
+}
+/* line 238, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+a:clicked {
+  color: inherit;
+}
+
+/* line 243, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.label-switch {
+  border-radius: 20px;
+  cursor: pointer;
+  display: inline-block;
+  height: 20px;
+  position: relative;
+  width: 40px;
+}
+/* line 264, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.label-switch input[type="checkbox"] {
+  display: none;
+}
+/* line 267, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.label-switch input[type="checkbox"] + .checkbox {
+  background: #e8e8e8;
+  display: inline-block;
+  border: 0;
+  border-radius: 20px;
+  cursor: pointer;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  transition: all 0.3s ease;
+  width: 40px;
+  z-index: 0;
+}
+/* line 281, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.label-switch input[type="checkbox"] + .checkbox::before {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  bottom: 0;
+  left: 2px;
+  background: white;
+  border-radius: 20px;
+  content: "";
+  height: 16px;
+  transform: scale(1);
+  transition: all 0.3s ease;
+  width: 36px;
+  z-index: 1;
+}
+/* line 293, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.label-switch input[type="checkbox"] + .checkbox::after {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  bottom: 0;
+  left: 2px;
+  height: 16px;
+  width: 16px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  content: "";
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+/* line 306, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.label-switch input[type="checkbox"]:checked + .checkbox {
+  background: rgba(80, 185, 224, 0.6);
+}
+/* line 309, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.label-switch input[type="checkbox"]:checked + .checkbox::before {
+  transform: scale(0);
+}
+/* line 313, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.label-switch input[type="checkbox"]:checked + .checkbox::after {
+  left: 22px;
+}
+
+/* line 321, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.trip-title {
+  font-family: "Gudea", sans-serif;
+  letter-spacing: 1.5px;
+  font-size: 30px;
+  text-align: center;
+}
+
+/* line 328, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* line 335, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.card {
+  background-color: #f6f6f6;
+  font-style: "Gudea", sans-serif;
+  border: 1px solid gainsboro;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px #e6e6e6;
+  cursor: pointer;
+  flex-basis: 15em;
+  flex-grow: 1;
+  margin: 0 1em 1.5em 1em;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  max-width: 300px;
+}
+/* line 364, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.card .card-image {
+  background-color: #F8F2B4;
+  height: 150px;
+  max-height: 150px;
+  overflow: hidden;
+}
+/* line 370, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.card .card-image img {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+}
+/* line 378, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.card .card-header {
+  font-family: "Gudea", sans-serif;
+  background-color: #f6f6f6;
+  border-bottom: 1px solid gainsboro;
+  border-radius: 3px 3px 0 0;
+  font-weight: bold;
+  line-height: 1.5em;
+  padding: 0.5em 0.75em;
+  transition: all 0.2s ease-in-out;
+}
+/* line 389, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.card .card-copy {
+  font-family: "Gudea", sans-serif;
+  font-size: 0.9em;
+  line-height: 1.5em;
+  padding: 0.75em 0.75em;
+}
+/* line 395, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.card .card-copy p {
+  margin: 0 0 0.75em;
+}
+/* line 400, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.card:focus, .card:hover {
+  cursor: pointer;
+}
+/* line 404, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.card:focus img, .card:hover img {
+  opacity: 0.7;
+}
+/* line 409, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.card:active {
+  background-color: #f6f6f6;
+}
+/* line 412, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.card:active .card-header {
+  background-color: #f6f6f6;
+}
+
+/* line 418, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.comment {
+  border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+  display: table;
+  margin-bottom: 1.5em;
+  padding-bottom: 1em;
+  width: 100%;
+}
+/* line 438, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.comment .comment-image,
+.comment .comment-content {
+  display: table-cell;
+  vertical-align: top;
+}
+/* line 444, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.comment .comment-image {
+  padding-right: 1.4em;
+}
+/* line 447, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.comment .comment-image > img {
+  background: #d1d1d1;
+  border-radius: 50%;
+  display: block;
+  height: auto;
+  max-width: none;
+  width: 4em;
+}
+/* line 456, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.comment-reverse-order .comment .comment-image {
+  padding-left: 10px;
+  padding-right: 0;
+}
+/* line 462, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.comment .comment-content {
+  width: 100%;
+}
+/* line 465, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.comment .comment-content h1 {
+  font-size: 1em;
+  margin: 0 0 0.5em 0;
+}
+/* line 470, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.comment .comment-content p {
+  line-height: 1.5em;
+  margin-bottom: 0.5em;
+}
+/* line 475, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.comment .comment-content p.comment-detail {
+  color: rgba(51, 51, 51, 0.5);
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+/* line 483, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.tooltip-item {
+  background: white;
+  border: 1px solid gainsboro;
+  border-radius: 50%;
+  display: flex;
+  padding: 1%;
+  position: relative;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  height: 21.5px;
+  width: 21.5px;
+  margin-left: 3%;
+}
+/* line 509, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.tooltip-item:focus, .tooltip-item:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+/* line 515, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.tooltip-item .tooltip {
+  bottom: 3em;
+  top: -89px;
+  left: -87px;
+  background-color: white;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 2px silver;
+  color: #333;
+  font-size: 0.9em;
+  line-height: 1.5em;
+  margin: 0 auto;
+  position: absolute;
+  width: 200px;
+  opacity: 0;
+  padding: 1em;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  visibility: hidden;
+  z-index: 10;
+}
+/* line 536, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.tooltip-item .tooltip p {
+  color: #333;
+  line-height: 1.5em;
+  margin: 0;
+}
+/* line 542, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/home.scss */
+.tooltip-item .tooltip::after {
+  position: absolute;
+  right: 0;
+  left: 0;
+  border: 8px solid transparent;
+  bottom: -1.3em;
+  color: white;
+  content: "▼";
+  font-size: 1.4em;
+  margin-left: -8px;
+  text-align: center;
+  text-shadow: 0 2px 2px silver;
+}
+
+/* line 2, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/pace.scss */
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  z-index: 2000;
+  position: fixed;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  width: 200px;
+  background: #fff;
+  border: 1px solid #ffcb3c;
+  overflow: hidden;
+}
+
+/* line 24, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/pace.scss */
+.pace .pace-progress {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  max-width: 200px;
+  position: fixed;
+  z-index: 2000;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 100%;
+  height: 100%;
+  width: 100%;
+  background: #ffe55e;
+}
+
+/* line 49, /Users/Calvin/tripcast/tripcast2/app/assets/stylesheets/pace.scss */
+.pace.pace-inactive {
+  display: none;
+}
