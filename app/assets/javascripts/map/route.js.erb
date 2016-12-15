@@ -8,56 +8,54 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
       departureTime: new Date(time),
       trafficModel: 'bestguess'
     }
-  }, function(response, status) {
+  }, function (response, status) {
     if (status === 'OK') {
       directionsDisplay.setDirections(response);
-      var mapObject = (response.routes[0].legs[0].steps);
+      var mapObject = response.routes[0].legs[0].steps;
       time = document.getElementById('trip_departure').value;
       getcoords(mapObject, 0, time);
       Pace.restart();
-      }
+    }
   });
 
   function getcoords(mapObject, counter, time) {
-      var  i  = counter;
-      var lat = (mapObject[i].start_location.lat(mapObject[i].start_location.lng));
-      var lng = (mapObject[i].start_location.lng(mapObject[i].start_location.lat));
-      var instructions = mapObject[i].instructions
-      // console.log(mapObject[i]);
-      weatherCoords = { lat: parseFloat(lat), lng: parseFloat(lng) };
-      if (i === 0) {
-        var milliseconds = Date.parse(time)
-      } else {
-        milliseconds = ((time * 1000) + (mapObject[i - 1].duration.value * 1000))
+    var i = counter;
+    var lat = mapObject[i].start_location.lat(mapObject[i].start_location.lng);
+    var lng = mapObject[i].start_location.lng(mapObject[i].start_location.lat);
+    var instructions = mapObject[i].instructions;
+    weatherCoords = { lat: parseFloat(lat), lng: parseFloat(lng) };
+    if (i === 0) {
+      var milliseconds = Date.parse(time);
+    } else {
+      milliseconds = time * 1000 + mapObject[i - 1].duration.value * 1000;
+    }
+    var time = Math.floor(milliseconds / 1000);
+    $.ajax({
+      url: 'https://api.darksky.net/forecast/<%= ENV['WEATHER_KEY'] %>/' + lat + ',' + lng + ',' + time + '?',
+      dataType: "jsonp",
+      success: function success(parsed_json) {
+        var weatherData = parsed_json;
+        var precipProb = Math.floor(weatherData.currently.precipProbability * 100);
+        var temp = Math.floor(weatherData.currently.apparentTemperature);
+        if (weatherData.alerts !== undefined) {
+          var weatherIcon = weatherData.currently.icon + '-alert';
+        } else {
+          var weatherIcon = weatherData.currently.icon;
+        }
+        if (mapObject[i].distance.value > 20000 || i == mapObject.length - 1) {
+          addMarker(weatherCoords, weatherData, weatherIcon);
+        }
+        if (counter < mapObject.length - 1) {
+          getcoords(mapObject, i + 1, time);
+          steps.push({ step: instructions,
+            i: i + 1,
+            weatherData: weatherData,
+            temp: temp,
+            precip: precipProb });
+        } else {
+          renderSteps(steps);
+        }
       }
-      var time = Math.floor(milliseconds/1000);
-        $.ajax({
-                url: `https://api.darksky.net/forecast/<%= ENV['WEATHER_KEY'] %>/${lat},${lng},${time}?`,
-                dataType : "jsonp",
-                success : function(parsed_json) {
-                  var weatherData = parsed_json;
-                  var precipProb = Math.floor(weatherData.currently.precipProbability * 100)
-                  var temp = Math.floor(weatherData.currently.apparentTemperature)
-                  if (weatherData.alerts !== undefined) {
-                    var weatherIcon = `${weatherData.currently.icon}-alert`
-                  } else {
-                    var weatherIcon = weatherData.currently.icon
-                  }
-                  if (mapObject[i].distance.value > 20000 ||
-                    i == mapObject.length - 1) {
-                      addMarker(weatherCoords, weatherData, weatherIcon);
-                    }
-                  if (counter < mapObject.length - 1) {
-                    getcoords(mapObject, i+1, time);
-                    steps.push({step: instructions,
-                                i: (i + 1),
-                                weatherData: weatherData,
-                                temp: temp,
-                                precip: precipProb})
-                  } else {
-                    renderSteps(steps)
-                  }
-                }
-        });
+    });
   }
 }

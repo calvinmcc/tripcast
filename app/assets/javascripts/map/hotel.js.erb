@@ -1,17 +1,17 @@
 function getHotelPrices(lat, lng) {
-  var latitude = lat.toFixed(4)
-  var longitude = lng.toFixed(4)
+  var latitude = lat.toFixed(4);
+  var longitude = lng.toFixed(4);
   var checkInTime = document.getElementById('trip_departure').value;
   var checkIn = checkInTime.substring(0, 10);
-  var nextDay = moment(checkIn).add(1, 'day')
-  var checkOut = nextDay.format('YYYY-MM-DD')
+  var nextDay = moment(checkIn).add(1, 'day');
+  var checkOut = nextDay.format('YYYY-MM-DD');
   $.ajax({
-    url: `https://api.sandbox.amadeus.com/v1.2/hotels/search-circle?apikey=<%= ENV['HOTEL_KEY'] %>&latitude=${latitude}&longitude=${longitude}&radius=25&check_in=${checkIn}&check_out=${checkOut}&lang=EN&currency=USD&number_of_results=10&all_rooms=false&show_sold_out=false`,
+    url: 'https://api.sandbox.amadeus.com/v1.2/hotels/search-circle?apikey=<%= ENV['HOTEL_KEY'] %>&latitude=' + latitude + '&longitude=' + longitude + '&radius=25&check_in=' + checkIn + '&check_out=' + checkOut + '&lang=EN&currency=USD&number_of_results=10&all_rooms=false&show_sold_out=false',
     dataType: "json",
-    success: function(data) {
-      var hotelData = data.results
-      hotel = hotelData
-      addHotelMarker(hotelData)
+    success: function success(data) {
+      var hotelData = data.results;
+      hotel = hotelData;
+      addHotelMarker(hotelData);
     }
   });
 }
@@ -28,42 +28,37 @@ function addHotelMarker(hotelData) {
       animation: google.maps.Animation.DROP,
       map: map
     });
-    hotelMarkers.push(marker)
-    addHotelWindow(location, marker, hotelObject)
+    hotelMarkers.push(marker);
+    addHotelWindow(location, marker, hotelObject);
   }
 }
 
-function addHotelWindow (location, marker, hotelObject) {
-  var name = hotelObject.property_name
-  var price = hotelObject.total_price.amount
-  var address = hotelObject.address
-  var hotelForecast = `<div id="forecast">
-                        <h3>${name}</h3>
-                        <h2>Total Price: $${price} USD</h2>
-                        <h4>${address.line1}</h4>
-                        <h4>${address.city}, ${address.region} ${address.postal_code}</h4>
-                      </div>`
+function addHotelWindow(location, marker, hotelObject) {
+  var name = hotelObject.property_name;
+  var price = hotelObject.total_price.amount;
+  var address = hotelObject.address;
+  var hotelForecast = '<div id="forecast">\n                        <h3>' + name + '</h3>\n                        <h2>Total Price: $' + price + ' USD</h2>\n                        <h4>' + address.line1 + '</h4>\n                        <h4>' + address.city + ', ' + address.region + ' ' + address.postal_code + '</h4>\n                      </div>';
   var hotelWindow = new google.maps.InfoWindow({
     content: hotelForecast,
     map: map,
     location: location
-  })
+  });
   hotelWindows.push(hotelWindow);
   hotelWindow.close();
-  marker.addListener('click', function(){
+  marker.addListener('click', function () {
     clearHotelWindows();
     hotelWindow.open(map, marker);
   });
 }
 
 function clearHotelMarkers() {
-  for (var i=0; i<hotelMarkers.length; i++) {
-    hotelMarkers[i].setMap(null)
+  for (var i = 0; i < hotelMarkers.length; i++) {
+    hotelMarkers[i].setMap(null);
   }
 }
 
 function clearHotelWindows() {
-  for (var i=0; i <hotelWindows.length; i++) {
+  for (var i = 0; i < hotelWindows.length; i++) {
     hotelWindows[i].close();
   }
 }

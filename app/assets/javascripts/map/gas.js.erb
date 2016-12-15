@@ -1,18 +1,18 @@
 function getGasPrices(lat, lng) {
   Pace.restart();
   $.ajax({
-    url: `http://api.mygasfeed.com/stations/radius/${lat}/${lng}/10/reg/price/<%= ENV['GAS_KEY'] %>.json?callback=?`,
+    url: 'http://api.mygasfeed.com/stations/radius/' + lat + '/' + lng + '/10/reg/price/<%= ENV['GAS_KEY'] %>.json?callback=?',
     dataType: "jsonp",
-    success: function(data) {
-      var gasData = data
-      gas = gasData
-      addGasMarker(gasData)
+    success: function success(data) {
+      var gasData = data;
+      gas = gasData;
+      addGasMarker(gasData);
     }
   });
 }
 
 function addGasMarker(gasData) {
-  var stations = gasData.stations
+  var stations = gasData.stations;
   if (stations.length > 10) {
     for (var i = 0; i < 10; i++) {
       var lat = stations[i].lat;
@@ -25,8 +25,8 @@ function addGasMarker(gasData) {
         position: location,
         map: map
       });
-      gasMarkers.push(marker)
-      addGasWindow(location, marker, gasObject)
+      gasMarkers.push(marker);
+      addGasWindow(location, marker, gasObject);
     }
   } else {
     for (var i = 0; i <= stations.length; i++) {
@@ -40,40 +40,37 @@ function addGasMarker(gasData) {
         position: location,
         map: map
       });
-      gasMarkers.push(marker)
-      addGasWindow(location, marker, gasObject)
+      gasMarkers.push(marker);
+      addGasWindow(location, marker, gasObject);
     }
   }
 }
 
-function addGasWindow (location, marker, gasObject) {
-  var stationName = gasObject.station
-  var price = gasObject.reg_price
-  var gasForecast = `<div id="forecast">
-                      <h3>${stationName}</h3>
-                      <h2>Average price: $${price}/gallon USD</h2>
-                    </div>`
+function addGasWindow(location, marker, gasObject) {
+  var stationName = gasObject.station;
+  var price = gasObject.reg_price;
+  var gasForecast = '<div id="forecast">\n                      <h3>' + stationName + '</h3>\n                      <h2>Average price: $' + price + '/gallon USD</h2>\n                    </div>';
   var gasWindow = new google.maps.InfoWindow({
     content: gasForecast,
     map: map,
     location: location
-  })
+  });
   gasWindows.push(gasWindow);
   gasWindow.close();
-  marker.addListener('click', function(){
+  marker.addListener('click', function () {
     clearGasWindows();
     gasWindow.open(map, marker);
   });
 }
 
 function clearGasMarkers() {
-  for (var i=0; i<gasMarkers.length; i++) {
-    gasMarkers[i].setMap(null)
+  for (var i = 0; i < gasMarkers.length; i++) {
+    gasMarkers[i].setMap(null);
   }
 }
 
 function clearGasWindows() {
-  for (var i=0; i <gasWindows.length; i++) {
+  for (var i = 0; i < gasWindows.length; i++) {
     gasWindows[i].close();
   }
 }
