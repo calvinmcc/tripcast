@@ -1,15 +1,12 @@
 function getGasPrices(lat, lng) {
   Pace.restart();
-  $.ajax({
-    url: 'http://api.mygasfeed.com/stations/radius/' + lat + '/' + lng + '/10/reg/price/<%= ENV['GAS_KEY'] %>.json?callback=?',
-    dataType: "jsonp",
-    success: function success(data) {
+  $.get('/api/v1/gas/', {lat: lat, lng: lng },
+      function success(data) {
       var gasData = data;
       gas = gasData;
       addGasMarker(gasData);
-    }
-  });
-}
+    })
+  };
 
 function addGasMarker(gasData) {
   var stations = gasData.stations;
