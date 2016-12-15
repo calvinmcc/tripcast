@@ -40,16 +40,11 @@ function initMap() {
   } else {
     handleLocationError(false, map.getCenter());
   }
-
-
   directionsDisplay.setMap(map);
-
   var onChangeHandler = function() {
     calculateAndDisplayRoute(directionsService, directionsDisplay);
   };
-
   map.addListener('click', clearInfoWindows);
-
   map.addListener('dblclick', function(event){
     if (gasMarkers.length > 0) {
       clearGasMarkers();

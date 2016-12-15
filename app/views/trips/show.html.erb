@@ -41,7 +41,7 @@
       </div>
       <div class="buttons">
         <input type="button" name="trip_go" value="GO" id="go">
-        <%= f.submit id: 'save', value: 'SAVE'%>
+        <%= f.submit 'SAVE', id: 'save', value: 'SAVE' %>
         <% end %>
         <%= link_to 'DELETE', trip_path(@trip),
                     method: :delete,

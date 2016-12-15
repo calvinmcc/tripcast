@@ -6,16 +6,12 @@ function calcRoute() {
     destination: end,
     travelMode: 'DRIVING'
   };
-
-
   directionsService.route(request, function(result, status) {
     if (status == 'OK') {
       directionsDisplay.setDirections(result);
     }
   });
-
 }
-
 
 var getDirectionData = function() {
   $('#tripDetails').fadeIn(800);
@@ -25,13 +21,7 @@ var getDirectionData = function() {
       origins: [document.getElementById('trip_start').value],
       destinations: [document.getElementById('trip_end').value],
       travelMode: 'DRIVING',
-      // transitOptions: TransitOptions,
-      // drivingOptions: DrivingOptions,
-      // unitSystem: UnitSystem,
-      // avoidHighways: Boolean,
-      // avoidTolls: Boolean,
     }, mapData);
-
   function mapData(response, status) {
     if (status == 'OK') {
       var origins = response.originAddresses;

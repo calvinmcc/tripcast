@@ -24,7 +24,7 @@ class TripsController < ApplicationController
     @trip = Trip.find params[:id]
     @trip.user = @user
     if @trip.update trip_params
-      redirect_to @trip, notice: 'Trip updated!'
+      redirect_to @trip
     else
       render :new, alert: 'Trip not saved!', id: 'error'
     end

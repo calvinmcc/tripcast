@@ -37,7 +37,7 @@ main {
 }
 
 .navbar-left {
-  margin-left: 1%;
+  margin-left: .5%;
   text-align: left;
   margin-right: 1%;
   z-index: 99999999;
@@ -222,9 +222,9 @@ html, body {
   font-size: 2.2em;
   justify-content: flex-end;
   z-index: 0;
-  flex-basis: 50px;
+  flex-basis: 60px;
   flex-grow: 0;
-  flex-shrink: 1;
+  flex-shrink: 0;
   img {
     position: relative;
     max-height: 1.2em;
