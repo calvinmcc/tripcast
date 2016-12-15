@@ -6,22 +6,21 @@ function calcRoute() {
     destination: end,
     travelMode: 'DRIVING'
   };
-  directionsService.route(request, function(result, status) {
+  directionsService.route(request, function (result, status) {
     if (status == 'OK') {
       directionsDisplay.setDirections(result);
     }
   });
 }
 
-var getDirectionData = function() {
+var getDirectionData = function getDirectionData() {
   $('#tripDetails').fadeIn(800);
   var service = new google.maps.DistanceMatrixService();
-  service.getDistanceMatrix(
-    {
-      origins: [document.getElementById('trip_start').value],
-      destinations: [document.getElementById('trip_end').value],
-      travelMode: 'DRIVING',
-    }, mapData);
+  service.getDistanceMatrix({
+    origins: [document.getElementById('trip_start').value],
+    destinations: [document.getElementById('trip_end').value],
+    travelMode: 'DRIVING'
+  }, mapData);
   function mapData(response, status) {
     if (status == 'OK') {
       var origins = response.originAddresses;
