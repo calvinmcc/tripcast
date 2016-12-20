@@ -1,5 +1,3 @@
-'use strict';
-
 function addInfoWindow(location, marker, weatherData) {
   var localTime = new Date(weatherData.currently.time * 1000);
   var timeAsString = moment(localTime, "YYYY-MM-DD HH:mm").format('LLL');

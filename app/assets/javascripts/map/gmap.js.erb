@@ -76,4 +76,7 @@ function initMap() {
   $('#go').on('click', onChangeHandler);
   $('#go').on('click', clearMarkers);
   $('#go').on('click', clearSteps);
+  $(document).on("keypress", "form", function(event) {
+    return event.keyCode != 13;
+  }); 
 }
