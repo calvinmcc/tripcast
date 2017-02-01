@@ -46,13 +46,16 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
           addMarker(weatherCoords, weatherData, weatherIcon);
         }
         if (counter < mapObject.length - 1) {
+          var stepTime = new Date(weatherData.currently.time * 1000);
+          var stepTimeAsString = moment(stepTime, "YYYY-MM-DD HH:mm").format('LLL')
           getcoords(mapObject, i + 1, time);
           steps.push({ step: instructions,
             i: i + 1,
             weatherData: weatherData,
             temp: temp,
             precip: precipProb,
-            icon: iconPaths[weatherIcon]
+            icon: iconPaths[weatherIcon],
+            time: stepTimeAsString
            });
         } else {
           renderSteps(steps);
