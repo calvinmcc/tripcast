@@ -5,8 +5,8 @@
 @import "form";
 
 $blue: rgba(80, 185, 224, 0.6);
-$accent: rgba(207,231,167, 0.6);
-$input: rgba(207,231,167, 0.3);
+$accent: rgba(80, 185, 224, 0.6);
+$input: rgb(255, 203, 60);
 $yellow: rgb(255, 203, 60);
 $lightyellow: rgb(255, 234, 97);
 $red: rgb(238, 99, 99);
@@ -15,18 +15,43 @@ $green: rgba(190, 227, 128, 1);
 $font: 'Hammersmith One', sans-serif;
 $body: 'Gudea', sans-serif;
 
+@mixin all-but($num) {
+  &:not(:nth-child(#{$num})) {
+    @content
+  }
+}
+
 .navbar {
   width: inherit;
-  background-color: $blue;
+  background-color: white;
   font-family: $font;
-  padding-right: 3px;
-  border-bottom: 0.2em solid $accent;
+  padding-right: 10px;
   z-index: 99999999;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   flex-basis: 70px;
   flex-shrink: 0;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  main {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  #map {
+    height: 100vh;
+  }
+}
+
+@media (max-width: 600px) {
+  #directionsPanel {
+    width: 100%;
+    height: 100vh;
+  }
 }
 
 main {
@@ -37,16 +62,31 @@ main {
 }
 
 .navbar-left {
-  margin-left: .5%;
+  margin-right: 10px;
   text-align: left;
-  margin-right: 1%;
   z-index: 99999999;
-  color: white;
+  color: black;
   font-family: $body;
   letter-spacing: 1.2px;
   transition: color, .5s;
+  transition: font-weight, .5s;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  & a {
+    padding: 4px;
+    @include all-but(3)
+    {
+      border-left: 1px solid black;
+      border-right: 1px solid black;
+    }
+  }
   & a:hover {
-    color: rgb(254, 255, 190);
+    color: rgb(97, 124, 208);
+    font-size: 1.4vw;
+  }
+  & img {
+    max-height: 1.8em;
   }
 }
 
@@ -59,14 +99,11 @@ main {
 }
 
 .title {
-  margin-top: .7em;
   z-index: 99999999;
-  color: white;
+  color: black;
   font-size: 2.2em;
   text-align: right;
-  &img {
-    display: inline;
-  }
+  margin-left: 10px;
 }
 
 #map {
@@ -77,6 +114,7 @@ main {
   overflow: hidden;
   flex-grow: 1;
   flex-shrink: 1;
+  flex: 3;
 }
 
 .alert {
@@ -93,8 +131,7 @@ input {
   font-size: 14px;
   font-family: $body;
   width: 98%;
-  border: 1px solid white;
-  border-bottom-color: $input;
+  border: 1px solid $input;
   transition: border 1s;
   height: 2em;
   &:focus {
@@ -119,8 +156,10 @@ html, body {
   font-family: $body;
   background-color: white;
   padding-top: 1%;
-  width: 30%;
+  width: 100%;
   height: 100%;
+  flex: 1;
+  margin-left: 10px;
 }
 
 #stepList {
@@ -217,18 +256,21 @@ html, body {
   @extend .navbar;
   margin-bottom: 0;
   border-bottom: none;
-  border-top: 0.1em solid $accent;
-  color: white;
+  color: black;
   font-size: 2.2em;
   justify-content: flex-end;
   z-index: 0;
-  flex-basis: 60px;
   flex-grow: 0;
   flex-shrink: 0;
   img {
     position: relative;
     max-height: 1.2em;
   }
+}
+
+#darksky {
+  z-index: 99999999;
+  max-height: 1.2em;
 }
 
 a {

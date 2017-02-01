@@ -9,18 +9,20 @@
   <link href="https://fonts.googleapis.com/css?family=Gudea|Hammersmith+One|Nunito+Sans" rel="stylesheet" />
   <body>
     <div class="navbar">
+      <div class="title"><a href="<%= root_path %>" data-turbolinks="false">🔆 tripcast</a></div>
       <% if current_user.nil? %>
         <div class="navbar-left">
-          <%= link_to 'Sign In', new_session_path %> |
+          <img src="<%= asset_path('darksky.png') %>" />
+          <%= link_to 'Sign In', new_session_path %>
           <%= link_to 'Sign Up', new_user_path %>
         </div>
       <% else %>
         <div class="navbar-left">
-          <%= link_to "Hey #{current_user.first_name}!", user_path(current_user) %> |
+          <img src="<%= asset_path('darksky.png') %>" />
+          <%= link_to "Hey #{current_user.first_name}!", user_path(current_user) %> 
           <%= link_to 'Sign Out', sessions_path, method: :delete %>
         </div>
       <% end %>
-      <div class="title"><a href="<%= root_path %>" data-turbolinks="false">🔆 tripcast</a></div>
     </div>
     <%= yield %>
   </body>
