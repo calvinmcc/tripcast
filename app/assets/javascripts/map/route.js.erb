@@ -48,6 +48,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         if (counter < mapObject.length - 1) {
           var stepTime = new Date(weatherData.currently.time * 1000);
           var stepTimeAsString = moment(stepTime, "YYYY-MM-DD HH:mm").format('LLL')
+          console.log(stepTimeAsString);
           getcoords(mapObject, i + 1, time);
           steps.push({ step: instructions,
             i: i + 1,
