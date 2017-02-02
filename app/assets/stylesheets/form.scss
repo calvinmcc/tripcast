@@ -17,6 +17,7 @@ $form: 'Nunito Sans', sans-serif;
   width: 50%;
   margin-left: 25%;
   margin-top: 5%;
+  height: 65vh;
   font-family: $form;
   & input {
     margin-top: 1%;
@@ -24,23 +25,36 @@ $form: 'Nunito Sans', sans-serif;
     font-size: 14px;
     width: 100%;
     border: 2px solid white;
-    border-bottom-color: $brightInput;
+    border-bottom-color: $yellow;
     transition: border 1s;
     height: 2em;
     &:focus {
       outline: none;
-      border: 2px solid $darkAccent;
+      border: 2px solid $blue;
     }
     &.button {
       width: 100%;
-      background-color: $blue;
+      height: 40px;
+      background-color: white;
       border-radius: 10px;
-      border: none;
-      margin-top: 2%;
+      border: 2px solid $yellow;
+      margin-top: 4%;
+      padding: 10px;
+      font-weight: bold;
+      transition: font-size, .2s;
+      transition: height, .2s;
+      transition: margin-top, .2s;
+      &:hover {
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 5%;
+        height: 44px;
+      }
     }
   }
 }
 
 .sign-in {
   margin-right: 10%;
+  position: static;
 }

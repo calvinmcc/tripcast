@@ -181,17 +181,20 @@ $responsive-nav-borders:    white;
   z-index: 99999999;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  flex-basis: 70px;
+  height: 70px;
   flex-shrink: 0;
   align-items: center;
 }
 
-// @media (max-width: 600px) {
-//   .navbar {
-//     position: sticky;
-//   }
-// }
+@media (max-width: 600px) {
+  .navbar {
+    position: fixed;
+    height: 65px;
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-right: 15px;
+  }
+}
 
 @media (max-width: 600px) {
   main {
@@ -307,6 +310,12 @@ html, body {
   html, body {
     height: 200vh;
     margin-right: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  #directionsPanel {
+    margin-top: 70px;
   }
 }
 
@@ -759,6 +768,15 @@ a {
       margin-left: -$tooltip-arrow-width;
       text-align: center;
       text-shadow: $tooltip-shadow;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .tooltip-item .tooltip {
+    left: -120px;
+    &::after {
+      margin-left: 60px;
     }
   }
 }
