@@ -1,133 +1,126 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-    <body>
-    <main>
-      <div id="directionsPanel">
-        <% if user_signed_in? %>
-          <%= form_for @trip do |f| %>
-          <div>
-            <%= f.label :start, value: "Start:" %>
-            <%= f.text_field :start %>
-          </div>
-          <div>
-            <%= f.label :end, value: "End:" %>
-            <%= f.text_field :end %>
-          </div>
-          <div>
-            <%= f.label :departure, value: "Departure time:" %>
-            <%= f.text_field :departure %>
-          </div>
-            <div class="options">
-              <div class="option-labels">
-                <div>Gas: &nbsp;
-                </div>
-                <label class="label-switch">
-                  <input type="checkbox" id="gas"/>
-                  <div class="checkbox"></div>
-                </label>
-              </div>
-              <div class="option-labels">
-                <div>Hotel: &nbsp;
-                </div>
-                <label class="label-switch">
-                  <input type="checkbox" id="hotel"/>
-                  <div class="checkbox"></div>
-                </label>
-              </div>
-              <div class="tooltip-item">
-                  ?
-                  <div class="tooltip">
-                    <p>Double-click the map to find gas and hotels!</p>
-                  </div>
-              </div>
+<main>
+  <div id="directionsPanel">
+    <% if user_signed_in? %>
+      <%= form_for @trip do |f| %>
+      <div>
+        <%= f.label :start, value: "Start:" %>
+        <%= f.text_field :start %>
+      </div>
+      <div>
+        <%= f.label :end, value: "End:" %>
+        <%= f.text_field :end %>
+      </div>
+      <div>
+        <%= f.label :departure, value: "Departure time:" %>
+        <%= f.text_field :departure %>
+      </div>
+        <div class="options">
+          <div class="option-labels">
+            <div>Gas: &nbsp;
             </div>
-          <div class="buttons">
-            <input type="button" name="trip_go" value="GO" id="go">
-            <%= f.submit 'SAVE', id: 'save', value: 'SAVE'%>
+            <label class="label-switch">
+              <input type="checkbox" id="gas"/>
+              <div class="checkbox"></div>
+            </label>
           </div>
-          <% end %>
-        <% else %>
-          <label for="trip_start">Start: </label>
-          <input type="text" name="trip_start" id="trip_start">
-          <br>
-          <label for="trip_end">End: </label>
-          <input type="text" name="trip_end" id="trip_end">
-          <br>
-          <label for="trip_departure">Departure time: </label>
-          <input type="text" name="trip_departure" id="trip_departure">
-          <br>
-          <div class="options">
-            <div class="option-labels">
-              <div>Gas: &nbsp;
+          <div class="option-labels">
+            <div>Hotel: &nbsp;
+            </div>
+            <label class="label-switch">
+              <input type="checkbox" id="hotel"/>
+              <div class="checkbox"></div>
+            </label>
+          </div>
+          <div class="tooltip-item">
+              ?
+              <div class="tooltip">
+                <p>Double-click the map to find gas and hotels!</p>
               </div>
-              <label class="label-switch">
-                <input type="checkbox" id="gas"/>
-                <div class="checkbox"></div>
-              </label>
-            </div>
-            <div class="option-labels">
-              <div>Hotel: &nbsp;
-              </div>
-              <label class="label-switch">
-                <input type="checkbox" id="hotel"/>
-                <div class="checkbox"></div>
-              </label>
-            </div>
-            <div class="tooltip-item">
-                ?
-                <div class="tooltip">
-                  <p>Double-click the map to find gas and hotels!</p>
-                </div>
-            </div>
           </div>
-          <div class="buttons">
-            <input type="button" name="trip_go" value="GO" id="go">
-          </div>
-          <br>
-        <% end %>
-        <div id="tripDetails" style="display: none">
-          <p>Travel time: <span id="tripTime"></span></p>
         </div>
-        <ul id="stepList"></ul>
-          <script type="x-tmpl-mustache" id="stepTemp">
-          {{#.}}
-          <li id={{i}} class="directionList">
-            <div class="comment">
-              <div class="comment-image">
-                <img src="{{icon}}">
-              </div>
-              <div class="comment-content">
-                <h1>{{{time}}}</h1>
-                <h1>{{{step}}}</h1>
-                <p>{{weatherData.currently.summary}}</p>
-                <p class="comment-detail">{{temp}}&deg;F, {{{precip}}}% chance of precipitation</p>
-              </div>
-            </div>
-            </li>
-          {{/.}}
-          </script>
+      <div class="buttons">
+        <input type="button" name="trip_go" value="GO" id="go">
+        <%= f.submit 'SAVE', id: 'save', value: 'SAVE'%>
+      </div>
+      <% end %>
+    <% else %>
+      <label for="trip_start">Start: </label>
+      <input type="text" name="trip_start" id="trip_start">
+      <br>
+      <label for="trip_end">End: </label>
+      <input type="text" name="trip_end" id="trip_end">
+      <br>
+      <label for="trip_departure">Departure time: </label>
+      <input type="text" name="trip_departure" id="trip_departure">
+      <br>
+      <div class="options">
+        <div class="option-labels">
+          <div>Gas: &nbsp;
+          </div>
+          <label class="label-switch">
+            <input type="checkbox" id="gas"/>
+            <div class="checkbox"></div>
+          </label>
         </div>
-        <div id="map"></div>
-      </main>
-      <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GMAPS_KEY']%>&libraries=places&callback=initMap" async defer>
+        <div class="option-labels">
+          <div>Hotel: &nbsp;
+          </div>
+          <label class="label-switch">
+            <input type="checkbox" id="hotel"/>
+            <div class="checkbox"></div>
+          </label>
+        </div>
+        <div class="tooltip-item">
+            ?
+            <div class="tooltip">
+              <p>Double-click the map to find gas and hotels!</p>
+            </div>
+        </div>
+      </div>
+      <div class="buttons">
+        <input type="button" name="trip_go" value="GO" id="go">
+      </div>
+      <br>
+    <% end %>
+    <div id="tripDetails" style="display: none">
+      <p>Travel time: <span id="tripTime"></span></p>
+    </div>
+    <ul id="stepList"></ul>
+      <script type="x-tmpl-mustache" id="stepTemp">
+      {{#.}}
+      <li id={{i}} class="directionList">
+        <div class="comment">
+          <div class="comment-image">
+            <img src="{{icon}}">
+          </div>
+          <div class="comment-content">
+            <h1>{{{time}}}</h1>
+            <h1>{{{step}}}</h1>
+            <p>{{weatherData.currently.summary}}</p>
+            <p class="comment-detail">{{temp}}&deg;F, {{{precip}}}% chance of precipitation</p>
+          </div>
+        </div>
+        </li>
+      {{/.}}
       </script>
-      <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
-      <script src="https://unpkg.com/flatpickr"></script>
-      <script type="text/javascript">
-        flatpickr("#trip_departure", {
-          defaultDate: Date.now(),
-          enableTime: true,
-          altInput: true,
-          altFormat: "F j, Y h:i K"
-        });
-      document.getElementById("trip_departure").flatpickr(config);
-      let calendar = new Flatpickr(element, config);
-      $(".selector").flatpickr({});
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
-  </body>
-</html>
+    </div>
+    <div id="map"></div>
+  </main>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GMAPS_KEY']%>&libraries=places&callback=initMap" async defer>
+  </script>
+  <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
+  <script src="https://unpkg.com/flatpickr"></script>
+  <script type="text/javascript">
+    flatpickr("#trip_departure", {
+      defaultDate: Date.now(),
+      enableTime: true,
+      altInput: true,
+      altFormat: "F j, Y h:i K",
+      disableMobile: true,
+      static: true
+    });
+  document.getElementById("trip_departure").flatpickr(config);
+  let calendar = new Flatpickr(element, config);
+  $(".selector").flatpickr({});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
