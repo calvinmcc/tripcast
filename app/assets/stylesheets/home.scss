@@ -150,6 +150,9 @@ $responsive-nav-borders:    white;
             display: inline-block;
             border-top: none;
         }
+        & a:hover {
+          color: rgb(97, 124, 208);
+        }
 
 }
 
@@ -184,29 +187,31 @@ $responsive-nav-borders:    white;
   align-items: center;
 }
 
+// @media (max-width: 600px) {
+//   .navbar {
+//     position: sticky;
+//   }
+// }
+
 @media (max-width: 600px) {
   main {
     flex-direction: column;
-    flex-basis: 100vh;
+    height: 200%;
+    width: 100%;
   }
 }
 
 @media (max-width: 600px) {
   #map {
-    height: 100vh;
-  }
-}
-
-@media (max-width: 600px) {
-  #directionsPanel {
-    width: 100%;
-    height: 100vh;
+    margin-top: 10vh;
+    margin-right: 0;
+    z-index: 9999;
   }
 }
 
 main {
   display: flex;
-  height: 100vh;
+  height: 200vh;
 }
 
 .navbar-left {
@@ -229,10 +234,6 @@ main {
       border-right: 1px solid black;
     }
   }
-  & a:hover {
-    color: rgb(97, 124, 208);
-    font-size: 1.4vw;
-  }
   & img {
     max-height: 1.8em;
   }
@@ -254,14 +255,18 @@ main {
   margin-left: 10px;
 }
 
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.2em;
+  }
+}
+
 #map {
   height: 100%;
   width: 100%;
   margin-right: 0;
   position: relative;
   overflow: hidden;
-  flex-grow: 1;
-  flex-shrink: 1;
   flex: 3;
 }
 
@@ -290,11 +295,19 @@ input {
 
 html, body {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
   position: static;
   display: flex;
   flex-flow: column;
+}
+
+@media (max-width: 600px) {
+  html, body {
+    height: 200vh;
+    margin-right: 0;
+  }
 }
 
 #directionsPanel {
@@ -317,6 +330,14 @@ html, body {
   padding: 0;
   list-style-type: none;
   overflow: scroll;
+}
+
+@media (max-width: 600px) {
+  #stepList {
+    position: absolute;
+    margin-top: 195vh;
+    height: 40vh;
+  }
 }
 
 #instruction {
@@ -430,8 +451,8 @@ a {
 }
 
 .label-switch {
-  $action-color: $blue !default;
-  $base-background-color: white !default;
+  $action-color: $yellow !default;
+  $base-background-color: $yellow !default;
   $switch-width: 40px;
   $switch-padding: 2px;
   $switch-height: 20px;
@@ -439,7 +460,7 @@ a {
   $knob-size: $switch-height - ($switch-padding * 2);
   $knob-radius: $switch-height - ($switch-padding * 2);
   $knob-width: $knob-size;
-  $switch-background: $base-background-color;
+  $switch-background: white;
   $switch-border-background: darken($base-background-color, 9%);
   $switch-shadow: 0 2px 5px transparentize(black, 0.6);
 
@@ -469,7 +490,7 @@ a {
 
       &::before {
         @include position(absolute, 2px 0 0 2px);
-        background: $switch-background;
+        background: white;
         border-radius: $switch-radius;
         content: "";
         height: $knob-radius;
