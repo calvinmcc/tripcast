@@ -80,7 +80,9 @@
     defaultDate: "<%= @trip.departure  %>",
     enableTime: true,
     altInput: true,
-    altFormat: "F j, Y h:i K"
+    altFormat: "F j, Y h:i K",
+    disableMobile: false,
+    static: true
   });
   document.getElementById("trip_departure").flatpickr(config);
   let calendar = new Flatpickr(element, config);

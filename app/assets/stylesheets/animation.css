@@ -1,0 +1,15 @@
+
+@keyframes logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.logo {
+  animation: logo-spin infinite 6s linear;
+  display: inline-flex;
+  justify-content: center;
+  align-items: baseline;
+  height: inherit;
+  width: 1.2em;
+  padding: 0;
+}

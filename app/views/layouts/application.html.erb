@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css?family=Gudea|Hammersmith+One|Nunito+Sans" rel="stylesheet" />
   <body>
     <div class="navbar">
-      <div class="title"><a href="<%= root_path %>" data-turbolinks="false">🔆 tripcast</a></div>
+      <div class="title"><a href="<%= root_path %>" data-turbolinks="false"><img class="logo" src="<%= image_path('clear-day0.svg') %>" /> tripcast</a></div>
       <% if current_user.nil? %>
         <div class="navbar-left">
           <img src="<%= asset_path('darksky.png') %>"/>
