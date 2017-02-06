@@ -15,7 +15,19 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
       time = document.getElementById('trip_departure').value;
       getcoords(mapObject, 0, time);
       Pace.restart();
-    }
+        directionsDisplay.addListener('directions_changed', function() {
+          var newRouteObject = directionsDisplay.getDirections();
+          var newRouteMapObject = newRouteObject.routes[0].legs[0].steps;
+          var tripTime = newRouteObject.routes[0].legs[0].duration.text
+          $('#tripTime').html('');
+          $('#tripTime').html(tripTime);
+          time = document.getElementById('trip_departure').value;
+          getcoords(newRouteMapObject, 0, time);
+          Pace.restart();
+          clearMarkers();
+          clearSteps();
+        });
+      }
   });
 
   function getcoords(mapObject, counter, time) {

@@ -13,13 +13,10 @@ function initMap() {
   Pace.start();
   var directionsService = new google.maps.DirectionsService();
   var directionsDisplay = new google.maps.DirectionsRenderer({
-    draggable: false,
+    draggable: true,
     map: map,
     suppressMarkers: true
   });
-    var pos = {
-
-    };
     map = new google.maps.Map(document.getElementById('map'), {
     zoom: 2,
     mapTypeId: 'roadmap',

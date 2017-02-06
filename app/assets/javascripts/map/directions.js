@@ -13,7 +13,7 @@ function calcRoute() {
   });
 }
 
-var getDirectionData = function getDirectionData() {
+var getDirectionData = function getDirectionData(waypoints) {
   $('#tripDetails').fadeIn(800);
   var service = new google.maps.DistanceMatrixService();
   service.getDistanceMatrix({
