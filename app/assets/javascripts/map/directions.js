@@ -23,19 +23,8 @@ var getDirectionData = function getDirectionData(waypoints) {
   }, mapData);
   function mapData(response, status) {
     if (status == 'OK') {
-      var origins = response.originAddresses;
-      var destinations = response.destinationAddresses;
-      for (var i = 0; i < origins.length; i++) {
-        var results = response.rows[i].elements;
-        for (var j = 0; j < results.length; j++) {
-          var element = results[j];
-          var distance = element.distance.text;
-          var duration = element.duration.text;
-          var from = origins[i];
-          var to = destinations[j];
-          $('#tripTime').html(duration);
-        }
-      }
+      var duration = response.rows[0].elements[0].duration.text;
+      $('#tripTime').html(duration);
     }
   }
 };
