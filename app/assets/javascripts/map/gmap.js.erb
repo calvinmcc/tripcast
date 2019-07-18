@@ -3,10 +3,10 @@ var markers = [];
 var map;
 var infowindows = [];
 var steps = [];
-var gasMarkers = [];
-var gasWindows = [];
-var hotelMarkers = [];
-var hotelWindows = [];
+// var gasMarkers = [];
+// var gasWindows = [];
+// var hotelMarkers = [];
+// var hotelWindows = [];
 
 
 function initMap() {
@@ -35,31 +35,31 @@ function initMap() {
     calculateAndDisplayRoute(directionsService, directionsDisplay);
   };
   map.addListener('click', clearInfoWindows);
-  map.addListener('dblclick', function(event){
-    if (gasMarkers.length > 0) {
-      clearGasMarkers();
-      Pace.restart();
-    }
-    var check = document.getElementById('gas').checked
-    if (check == true) {
-      var lat = event.latLng.lat(event.latLng.lng)
-      var lng = event.latLng.lng(event.latLng.lat)
-      getGasPrices(lat, lng)
-    }
-  });
+  // map.addListener('dblclick', function(event){
+  //   if (gasMarkers.length > 0) {
+  //     clearGasMarkers();
+  //     Pace.restart();
+  //   }
+  //   var check = document.getElementById('gas').checked
+  //   if (check == true) {
+  //     var lat = event.latLng.lat(event.latLng.lng)
+  //     var lng = event.latLng.lng(event.latLng.lat)
+  //     getGasPrices(lat, lng)
+  //   }
+  // });
 
-  map.addListener('dblclick', function(event){
-    if (hotelMarkers.length > 0) {
-      clearHotelMarkers();
-      Pace.restart();
-    }
-    var check = document.getElementById('hotel').checked
-    if (check == true) {
-      var lat = event.latLng.lat(event.latLng.lng)
-      var lng = event.latLng.lng(event.latLng.lat)
-      getHotelPrices(lat, lng)
-    }
-  });
+  // map.addListener('dblclick', function(event){
+  //   if (hotelMarkers.length > 0) {
+  //     clearHotelMarkers();
+  //     Pace.restart();
+  //   }
+  //   var check = document.getElementById('hotel').checked
+  //   if (check == true) {
+  //     var lat = event.latLng.lat(event.latLng.lng)
+  //     var lng = event.latLng.lng(event.latLng.lat)
+  //     getHotelPrices(lat, lng)
+  //   }
+  // });
 
   $('#go').on('click', getDirectionData);
   $('#go').on('click', onChangeHandler);
